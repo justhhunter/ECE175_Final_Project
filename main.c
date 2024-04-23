@@ -11,19 +11,28 @@ typedef struct {
 
 
 int main(){
-  // declare and initialize variables
+     // declare and initialize variables
+     int playerChoice = 0;
+
+     
+     // prompt player to shuffle new deck or use old deck
+     printf("Welcome to Game of Trains\n Would you like to start from new (enter 1) or load a deck (enter 2)?");
+     scanf("%d",&playerChoice);
+     while(playerChoice != (1 || 2)){
+          printf("Sorry not a valid choice, 1 for new deck, 2 to load deck from file:")
+          scanf("%d",&playerChoice);
+     }
+     
+
+     // deal cards to each player
+     
+
+      // go through initial game rules/start game
+     // player 1 draws and replaces card
+     // player 2 draws two cards and discards one
 
 
-  // prompt player to shuffle new deck or use old deck
-
-  // deal cards to each player
-
-  // go through initial game rules/start game
-  // player 1 draws and replaces card
-  // player 2 draws two cards and discards one
-
-
-  //  while loop to let game go continuously
+     //  while loop to let game go continuously
 
 
 
@@ -31,7 +40,6 @@ int main(){
   
   return 0;
 }
-
 
 
 // void initializeDeck(card *deck);
