@@ -41,8 +41,10 @@ int main(){
   return 0;
 }
 
+// void takeTurn(card *player, card *centerSpace, card *deck);
+// Allows player to take their turn
 
-// void initializeDeck(card *deck);
+// void buildDeck(card *deck);
 // Creates a deck using a card array
 
 // void shuffleDeck(card *deck);
