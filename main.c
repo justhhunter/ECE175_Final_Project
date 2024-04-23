@@ -18,8 +18,8 @@ int main(){
      // prompt player to shuffle new deck or use old deck
      printf("Welcome to Game of Trains\n Would you like to start from new (enter 1) or load a deck (enter 2)?");
      scanf("%d",&playerChoice);
-     while(playerChoice != (1 || 2)){
-          printf("Sorry not a valid choice, 1 for new deck, 2 to load deck from file:")
+     while((playerChoice != 1) && (playerChoice != 2)){
+          printf("Sorry not a valid choice, 1 for new deck, 2 to load deck from file:");
           scanf("%d",&playerChoice);
      }
      
