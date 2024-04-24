@@ -15,6 +15,7 @@ void buildDeck(card *deck);
 int main(){
      // declare and initialize variables
      card deck[84];
+     card discardPile[84];
      card player1[7];
      card player2[7];
      card centerRow[];
