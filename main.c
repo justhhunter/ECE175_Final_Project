@@ -83,7 +83,7 @@ void buildDeck(card *deck){
 // Prints all the cards currently on the table to give a visual to the users
 void printCards(card *player1, card *player2, card *centerRow){
      for(int i = 0; i < 7; i++){
-           printf();
+           
      }
      for(int j = 0; j < 8; j++){
            
@@ -99,14 +99,7 @@ void printSingleCard(int cardVal){
           int tensDigit = cardVal / 10;
           int onesDigit = cardVal % 10;
      }
-     // print card top border
-     printf("--------------------");
-     for(int i = 0; i < 10; i++){ // print 10 vertical rows
-          printf("\n"); // print newline so you can print each row
-          for(int j = 0; j < 20; j++){ // print 20 horizontal rows
-               
-          }
-     }
+
 }
 
 // void loadDeck(card *deck, FILE *inp);
