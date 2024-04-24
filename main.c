@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-const char* numVisuals[] = {
-     "|\n|\n|\n|\n|\n"//1
-     "------\n     |\n     |\n     |\n------\n|\n|\n|\n------"//2
 
-}
 
 typedef struct {
      int value;
@@ -14,8 +10,6 @@ typedef struct {
 
 
 void buildDeck(card *deck);
-void printCards(card *player1, card *player2, card *centerRow);
-void printSingleCard(int cardVal);
 
 int main(){
      // declare and initialize variables
@@ -78,29 +72,6 @@ void buildDeck(card *deck){
 
 // void sortCards(card *player1, card *player2);
 // Sorts cards that are given to the players in descending order
-
-// void printCards(card *player1, card *player2, card *centerRow);
-// Prints all the cards currently on the table to give a visual to the users
-void printCards(card *player1, card *player2, card *centerRow){
-     for(int i = 0; i < 7; i++){
-           
-     }
-     for(int j = 0; j < 8; j++){
-           
-     }
-     for(int k = 0; k < 7; k++){
-           
-     }
-}
-
-void printSingleCard(int cardVal){
-     // check to see if there are two digits
-     if(cardVal > 9){// separate digits for printing purposes
-          int tensDigit = cardVal / 10;
-          int onesDigit = cardVal % 10;
-     }
-
-}
 
 // void loadDeck(card *deck, FILE *inp);
 // Loads a deck from a preset file for testing purposes as defined in the project description
