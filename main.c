@@ -17,7 +17,7 @@ int main(){
      card deck[84];
      card player1[7];
      card player2[7];
-     card centerRow[]
+     card centerRow[];
      int playerChoice = 0;
 
      
