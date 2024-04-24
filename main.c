@@ -18,7 +18,7 @@ int main(){
      card discardPile[84];
      card player1[7];
      card player2[7];
-     card centerRow[7]; //unsure of total for this row
+     card centerRow[8]; //unsure of total for center row, double check before turn in
      int playerChoice = 0;
 
      
