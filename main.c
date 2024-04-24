@@ -76,6 +76,12 @@ void buildDeck(card *deck){
 
 // void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards currently on the table to give a visual to the users
+void printCards(card *player1, card *player2, card *centerRow){
+     for(int i = 0; i < 3; i++){
+          for(int j = 0; j < 7; j++){
+          }    
+     }
+}
 
 // void loadDeck(card *deck, FILE *inp);
 // Loads a deck from a preset file for testing purposes as defined in the project description
