@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+const char* numVisuals[] = {
+     "|\n|\n|\n|\n|\n"//1
+     "------\n     |\n     |\n     |\n------\n|\n|\n|\n------"//2
 
+}
 
 typedef struct {
      int value;
@@ -77,9 +81,14 @@ void buildDeck(card *deck){
 // void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards currently on the table to give a visual to the users
 void printCards(card *player1, card *player2, card *centerRow){
-     for(int i = 0; i < 3; i++){
-          for(int j = 0; j < 7; j++){
-          }    
+     for(int i = 0; i < 7; i++){
+           printf();
+     }
+     for(int j = 0; j < 8; j++){
+           
+     }
+     for(int k = 0; k < 7; k++){
+           
      }
 }
 
