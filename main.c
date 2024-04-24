@@ -10,7 +10,7 @@ typedef struct {
 
 
 void buildDeck(card *deck);
-void printCards(card *deck, card *player1, card *player2, card *centerRow);
+void printCards(card *player1, card *player2, card *centerRow);
 
 int main(){
      // declare and initialize variables
@@ -74,7 +74,7 @@ void buildDeck(card *deck){
 // void sortCards(card *player1, card *player2);
 // Sorts cards that are given to the players in descending order
 
-// void printCards(card *deck, card *player1, card *player2, card *centerRow);
+// void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards currently on the table to give a visual to the users
 
 // void loadDeck(card *deck, FILE *inp);
