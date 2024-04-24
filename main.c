@@ -15,6 +15,7 @@ typedef struct {
 
 void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
+void printSingleCard(int cardVal);
 
 int main(){
      // declare and initialize variables
@@ -89,6 +90,22 @@ void printCards(card *player1, card *player2, card *centerRow){
      }
      for(int k = 0; k < 7; k++){
            
+     }
+}
+
+void printSingleCard(int cardVal){
+     // check to see if there are two digits
+     if(cardVal > 9){// separate digits for printing purposes
+          int tensDigit = cardVal / 10;
+          int onesDigit = cardVal % 10;
+     }
+     // print card top border
+     printf("--------------------");
+     for(int i = 0; i < 10; i++){ // print 10 vertical rows
+          printf("\n"); // print newline so you can print each row
+          for(int j = 0; j < 20; j++){ // print 20 horizontal rows
+               
+          }
      }
 }
 
