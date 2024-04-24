@@ -15,6 +15,9 @@ void buildDeck(card *deck);
 int main(){
      // declare and initialize variables
      card deck[84];
+     card player1[7];
+     card player2[7];
+     card centerRow[]
      int playerChoice = 0;
 
      
@@ -48,8 +51,16 @@ int main(){
 // Allows player to take their turn
 
 // void buildDeck(card *deck);
-// Creates a deck using a card array
+// Creates a deck using a card array of size 84
 void buildDeck(card *deck){
+
+     // iterate through entire deck to initialize cards
+     for(int i = 0; i < 84; i++){
+          deck[i].value = i+1;
+          // when we learn all card values we can create a process to disperse them in correct numbers
+          // until then well use a placeholder
+          strcpy(deck[i].action, "placeholder");
+     }
      
 }
 
