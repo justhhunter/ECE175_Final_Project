@@ -9,9 +9,12 @@ typedef struct {
 } card;
 
 
+void buildDeck(card *deck);
+
 
 int main(){
      // declare and initialize variables
+     card deck[84];
      int playerChoice = 0;
 
      
@@ -46,6 +49,9 @@ int main(){
 
 // void buildDeck(card *deck);
 // Creates a deck using a card array
+void buildDeck(card *deck){
+     
+}
 
 // void shuffleDeck(card *deck);
 // Shuffles the cards in a given deck 
@@ -54,7 +60,7 @@ int main(){
 // Deals cards to the two players
 
 // void sortCards(card *player1, card *player2);
-// Sorts cards that are given to the players in ascending order
+// Sorts cards that are given to the players in descending order
 
 // void printCards(card *deck);
 // Prints all the cards currently on the table to give a visual to the users
