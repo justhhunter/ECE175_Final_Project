@@ -113,7 +113,8 @@ void buildDeck(card *deck){
           // modulus actionNum to rotate through 8 abilities for assignment
           actionNum++;
           modNum = actionNum % 8;
-          
+
+          // switch between all 8 abilities
           switch(modNum){
              case 1: strcpy(deck[i].action,"shift2Right"); break;
              case 2: strcpy(deck[i].action,"protect"); break;
