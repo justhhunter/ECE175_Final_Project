@@ -105,12 +105,28 @@ void printCards(card *player1, card *player2, card *centerRow){
 // Creates a deck using a card array of size 84
 void buildDeck(card *deck){
 
+      int actionNum = 0;
+      int modNum = 0;
      // iterate through entire deck to initialize cards
      for(int i = 0; i < 84; i++){
           deck[i].value = i+1;
-          // when we learn all card values we can create a process to disperse them in correct numbers
-          // until then well use a placeholder
-          strcpy(deck[i].action, "placeholder");
+          // modulus actionNum to rotate through 8 abilities for assignment
+          actionNum++;
+          modNum = actionNum % 8;
+          
+          switch(modNum){
+             case 1: strcpy(deck[i].action,"shift2Right"); break;
+             case 2: strcpy(deck[i].action,"protect"); break;
+             case 3: strcpy(deck[i].action,"shift2Left"); break;
+             case 4: strcpy(deck[i].action,"swapAdjacent"); break;
+             case 5: strcpy(deck[i].action,"removeMiddle"); break;
+             case 6: strcpy(deck[i].action,"removeRight"); break;
+             case 7: strcpy(deck[i].action,"removeLeft"); break;
+             case 8: strcpy(deck[i].action,"swapSkip1Card"); break;
+             
+             }
+          
+          
      }
      
 }
