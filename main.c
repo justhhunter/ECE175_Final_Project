@@ -67,6 +67,7 @@ int main(){
 // Prints all the cards in both players hands and the center row
 void printCards(card *player1, card *player2, card *centerRow){
    
+   printf("player1s hand: ");
    // prints all player 2s cards to console
    for(int i = 0; i < 7; i++){
       printf("%d %s", player2[i].value, player2[i].action);
@@ -74,7 +75,8 @@ void printCards(card *player1, card *player2, card *centerRow){
       }
       
    printf("\n");// newline to separate rows of cards
-      
+   printf("center row: ");
+   
    // prints all center row cards to console
    for(int j = 0; j < 8; j++){
       if(centerRow[j].value != 0){
@@ -84,6 +86,7 @@ void printCards(card *player1, card *player2, card *centerRow){
       }
       
    printf("\n");// newline to separate rows of cards
+   printf("player2s hand: ");
    
    // prints all player 1s cards to console
    for(int k = 0; k < 7; k++){
@@ -94,7 +97,6 @@ void printCards(card *player1, card *player2, card *centerRow){
    printf("\n");// newline to separate rows of cards
       
    }
-
 
 // void takeTurn(card *player, card *centerSpace, card *deck);
 // Allows player to take their turn
