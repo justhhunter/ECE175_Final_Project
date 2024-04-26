@@ -135,8 +135,24 @@ void buildDeck(card *deck){
 // void shuffleDeck(card *deck);
 // Shuffles the cards in a given deck 
 
-// void dealCards(card *deck);
+// void dealCards(card deck[], card p1[], card p2[]);
 // Deals cards to the two players
+void dealCards(card deck[], card p1[], card p2[]) {
+     int i;
+     int deckNum = 83;
+     for(i = 0; i < 7; i++) {
+          //change the player's respective card to the value in the deck, then indicate that the card is no longer in the deck
+          p1[i] = deck[deckNum];
+          deck[deckNum].value = 0;
+          strcpy(deck[deckNum].action, "placeholder");
+          deckNum -= 1;
+          
+          p2[i] = deck[deckNum];
+          deck[deckNum].value = 0;
+          strcpy(deck[deckNum].action, "placeholder");
+          deckNum -= 1;
+     }
+}
 
 // void sortCards(card *player1, card *player2);
 // Sorts cards that are given to the players in descending order
