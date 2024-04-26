@@ -34,12 +34,13 @@ int main(){
      if(playerChoice == 1){
         // build new deck
         buildDeck(deck);
+          // shuffle cards
          }else if(playerChoice == 2){
            // load deck from file
          }
          
 
-      // shuffle cards
+      
       
    
 
