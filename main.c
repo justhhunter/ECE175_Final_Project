@@ -11,6 +11,7 @@ typedef struct {
 
 void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
+void dealCards(card deck[], card p1[], card p2[]);
 
 int main(){
      // declare and initialize variables
@@ -156,6 +157,27 @@ void dealCards(card deck[], card p1[], card p2[]) {
 
 // void sortCards(card *player1, card *player2);
 // Sorts cards that are given to the players in descending order
+void sortCards(card p1[], card p2[]) {
+     int i,j;
+     int deckSize = 84;
+     card temp;
+     for (i = 1 i < deckSize; i++) {
+          j = i;
+          while (j > 0 && p1[j] > p1[j - 1]) {
+               temp = p1[j];
+               p1[j] = p1[j - 1];
+               p1[j - 1] = temp;
+               --j;
+          }
+          j =i;
+          while (j > 0 && p2[j] > p2[j - 1]) {
+               temp = p2[j];
+               p2[j] = p2[j - 1];
+               p2[j - 1] = temp;
+               --j;
+          }
+     }
+}
 
 // void loadDeck(card *deck, FILE *inp);
 // Loads a deck from a preset file for testing purposes as defined in the project description
