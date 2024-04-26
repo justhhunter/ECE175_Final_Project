@@ -10,6 +10,7 @@ typedef struct {
 
 
 void buildDeck(card *deck);
+void printCards(card *player1, card *player2, card *centerRow);
 
 int main(){
      // declare and initialize variables
@@ -58,6 +59,41 @@ int main(){
   
   return 0;
 }
+
+
+
+// void printCards(card *player1, card *player2, card *centerRow);
+// Prints all the cards in both players hands and the center row
+void printCards(card *player1, card *player2, card *centerRow){
+   
+   // prints all player 2s cards to console
+   for(int i = 0; i < 7; i++){
+      printf("%d %s", player2[i].value, player2[i].action);
+      printf("\t");
+      }
+      
+   printf("\n");// newline to separate rows of cards
+      
+   // prints all center row cards to console
+   for(int j = 0; j < 8; j++){
+      if(centerRow[j].value != 0){
+         printf("%d %s", centerRow[j].value, centerRow[j].action);
+         printf("\t");
+         }
+      }
+      
+   printf("\n");// newline to separate rows of cards
+   
+   // prints all player 1s cards to console
+   for(int k = 0; k < 7; k++){
+      printf("%d %s", player1[k].value, player1[k].action);
+      printf("\t");
+      }
+      
+   printf("\n");// newline to separate rows of cards
+      
+   }
+
 
 // void takeTurn(card *player, card *centerSpace, card *deck);
 // Allows player to take their turn
