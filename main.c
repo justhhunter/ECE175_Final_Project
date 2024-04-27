@@ -89,7 +89,7 @@ void printCards(card *player1, card *player2, card *centerRow){
    // prints all player 2s cards to console
    for(int i = 0; i < 7; i++){
       printf("%d %s", player2[i].value, player2[i].action);
-      printf("\t");
+      printf("  ");
       }
       
    printf("\n");// newline to separate rows of cards
@@ -99,7 +99,7 @@ void printCards(card *player1, card *player2, card *centerRow){
    for(int j = 0; j < 8; j++){
       if(centerRow[j].value != 0){
          printf("%d %s", centerRow[j].value, centerRow[j].action);
-         printf("\t");
+         printf("  ");
          }
       }
       
@@ -109,7 +109,7 @@ void printCards(card *player1, card *player2, card *centerRow){
    // prints all player 1s cards to console
    for(int k = 0; k < 7; k++){
       printf("%d %s", player1[k].value, player1[k].action);
-      printf("\t");
+      printf("  ");
       }
       
    printf("\n");// newline to separate rows of cards
