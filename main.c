@@ -56,7 +56,7 @@ int main(){
    
 
      // deal cards to each player
-     
+     // sort each players hand
 
       // go through initial game rules/start game
      // player 1 draws and replaces card
