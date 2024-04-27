@@ -216,19 +216,19 @@ void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
      
      size = 7;
      for (int j = 0; j < size; j++) {
-        player1[j].value = 0;               // Set the value to 0
-        strcpy(player1[j].action, "placeholder"); // Set the action to "placeholder"
+        player1[j].value = 0;              
+        strcpy(player1[j].action, "placeholder"); 
      }
 
      
      for (int k = 0; k < size; k++) {
-        player2[k].value = 0;               // Set the value to 0
-        strcpy(player2[k].action, "placeholder"); // Set the action to "placeholder"
+        player2[k].value = 0;              
+        strcpy(player2[k].action, "placeholder"); 
      }
 
      size = 8;
      for (int h = 0; h < size; h++) {
-        centerRow[h].value = 0;               // Set the value to 0
-        strcpy(centerRow[h].action, "placeholder"); // Set the action to "placeholder"
+        centerRow[h].value = 0;             
+        strcpy(centerRow[h].action, "placeholder"); 
      }
 }
