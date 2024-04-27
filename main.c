@@ -12,7 +12,7 @@ typedef struct {
 void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
-void loadDeck(card *deck, FILE *inp);
+void loadDeck(card *deck, FILE *file);
 void sortCards(card *player1, card *player2);
 
 int main(){
@@ -46,7 +46,7 @@ int main(){
             printf("Error opening file!\n");
             return 1;
              }
-          loadDeck(file,deck);
+          loadDeck(deck,file);
           fclose(file); // close file after use
          }
          
@@ -189,7 +189,12 @@ void sortCards(card p1[], card p2[]) {
      }
 }
 
-// void loadDeck(card *deck, FILE *inp);
+// void loadDeck(card *deck, FILE *file);
 // Loads a deck from a preset file for testing purposes as defined in the project description
-
+void loadDeck(card *deck, FILE *file){
+     // iterate through entire file and assign to deck
+     for(){
+          
+     }
+}
 
