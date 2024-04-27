@@ -92,7 +92,7 @@ void printCards(card *player1, card *player2, card *centerRow){
       printf("  ");
       }
       
-   printf("\n");// newline to separate rows of cards
+   printf('\n');// newline to separate rows of cards
    printf("center row: ");
    
    // prints all center row cards to console
@@ -103,7 +103,7 @@ void printCards(card *player1, card *player2, card *centerRow){
          }
       }
       
-   printf("\n");// newline to separate rows of cards
+   printf('\n');// newline to separate rows of cards
    printf("player2s hand: ");
    
    // prints all player 1s cards to console
@@ -112,7 +112,7 @@ void printCards(card *player1, card *player2, card *centerRow){
       printf("  ");
       }
       
-   printf("\n");// newline to separate rows of cards
+   printf('\n');// newline to separate rows of cards
       
    }
 
