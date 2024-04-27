@@ -40,6 +40,14 @@ int main(){
           // shuffle cards
          }else if(playerChoice == 2){
            // load deck from file
+          // check file is correctly opened
+          FILE *file = fopen("file.txt","r");
+          if (file == NULL) {
+            printf("Error opening file!\n");
+            return 1;
+             }
+          loadDeck(file,deck);
+          fclose(file); // close file after use
          }
          
 
