@@ -192,9 +192,9 @@ void sortCards(card p1[], card p2[]) {
 // void loadDeck(card *deck, FILE *file);
 // Loads a deck from a preset file for testing purposes as defined in the project description
 void loadDeck(card *deck, FILE *file){
-     // iterate through entire file and assign to deck
-     for(){
-          
+     // iterate through entire file and assign to deck value and actions
+     for(int i = 0; i < 84; i++){
+          fscanf(file,"%d %[^\n]",&deck[i].value,deck[i].action);
      }
 }
 
