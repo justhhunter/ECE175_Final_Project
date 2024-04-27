@@ -12,6 +12,7 @@ typedef struct {
 void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
+void loadDeck(card *deck, FILE *inp);
 
 int main(){
      // declare and initialize variables
