@@ -56,8 +56,12 @@ int main(){
    
 
      // deal cards to each player
+     dealCards();
+     
      // sort each players hand
-
+     
+     printCards(player1,player2,centerRow);
+     
       // go through initial game rules/start game
      // player 1 draws and replaces card
      // player 2 draws two cards and discards one
@@ -72,6 +76,8 @@ int main(){
   return 0;
 }
 
+
+// void initializeCards(card *player1, card *player2, card *centerRow){}
 
 
 // void printCards(card *player1, card *player2, card *centerRow);
