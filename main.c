@@ -55,7 +55,7 @@ int main(){
       
       
      // initialize cards
-
+     initializeCards(player1,player2,deck,centerRow);
      // deal cards to each player
      
      
