@@ -216,8 +216,8 @@ void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
      
      size = 7;
      for (int j = 0; j < size; j++) {
-        player2[j].value = 0;               // Set the value to 0
-        strcpy(player2[j].action, "placeholder"); // Set the action to "placeholder"
+        player1[j].value = 0;               // Set the value to 0
+        strcpy(player1[j].action, "placeholder"); // Set the action to "placeholder"
      }
 
      
