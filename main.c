@@ -171,7 +171,7 @@ void sortCards(card p1[], card p2[]) {
      int i,j;
      int deckSize = 84;
      card temp;
-     for (i = 1 i < deckSize; i++) {
+     for (i = 1; i < deckSize; i++) {
           j = i;
           while (j > 0 && p1[j] > p1[j - 1]) {
                temp = p1[j];
