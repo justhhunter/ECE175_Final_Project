@@ -173,14 +173,14 @@ void sortCards(card p1[], card p2[]) {
      card temp;
      for (i = 1; i < deckSize; i++) {
           j = i;
-          while (j > 0 && p1[j] > p1[j - 1]) {
+          while (j > 0 && p1[j].value > p1[j - 1].value) {
                temp = p1[j];
                p1[j] = p1[j - 1];
                p1[j - 1] = temp;
                --j;
           }
           j =i;
-          while (j > 0 && p2[j] > p2[j - 1]) {
+          while (j > 0 && p2[j].value > p2[j - 1].value) {
                temp = p2[j];
                p2[j] = p2[j - 1];
                p2[j - 1] = temp;
