@@ -14,6 +14,7 @@ void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
 void loadDeck(card *deck, FILE *file);
 void sortCards(card *player1, card *player2);
+void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
 
 int main(){
      // declare and initialize variables
@@ -53,10 +54,10 @@ int main(){
 
       
       
-   
+     // initialize cards
 
      // deal cards to each player
-     dealCards();
+     
      
      // sort each players hand
      
@@ -204,3 +205,30 @@ void loadDeck(card *deck, FILE *file){
      }
 }
 
+//void initializeCards(card *player1, card *player2, card *deck, card *centerRow)
+// initializes card arrays for card type struct
+void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
+     int size = 84;
+     for (int i = 0; i < size; i++) {
+        deck[i].value = 0;               
+        strcpy(deck[i].action, "placeholder"); 
+     }
+     
+     size = 7;
+     for (int i = 0; i < size; i++) {
+        player2[i].value = 0;               // Set the value to 0
+        strcpy(player2[i].action, "placeholder"); // Set the action to "placeholder"
+     }
+
+     
+     for (int i = 0; i < size; i++) {
+        player2[i].value = 0;               // Set the value to 0
+        strcpy(player2[i].action, "placeholder"); // Set the action to "placeholder"
+     }
+
+     size = 8;
+     for (int i = 0; i < size; i++) {
+        centerRow[i].value = 0;               // Set the value to 0
+        strcpy(centerRow[i].action, "placeholder"); // Set the action to "placeholder"
+     }
+}
