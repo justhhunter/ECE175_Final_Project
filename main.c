@@ -84,7 +84,7 @@ int main(){
 // void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards in both players hands and the center row
 void printCards(card *player1, card *player2, card *centerRow){
-   
+     printf("\n");// newline to separate rows of cards
    printf("player1s hand: ");
    // prints all player 2s cards to console
    for(int i = 0; i < 7; i++){
