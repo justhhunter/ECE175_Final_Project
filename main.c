@@ -38,7 +38,7 @@ int main(){
         // build new deck
         buildDeck(deck);
           // shuffle cards
-         }else if(playerChoice == 2){
+     }else if(playerChoice == 2){
            // load deck from file
           // check file is correctly opened
           FILE *file = fopen("file.txt","r");
@@ -48,7 +48,7 @@ int main(){
              }
           loadDeck(deck,file);
           fclose(file); // close file after use
-         }
+     }
          
 
       
