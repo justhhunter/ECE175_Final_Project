@@ -89,6 +89,7 @@ int main(){
 // void takeTurn(card *player, card *centerSpace, card *deck);
 // Allows player to take their turn
 
+
 // void buildDeck(card *deck);
 // Creates a deck using a card array of size 84
 void buildDeck(card *deck){
@@ -123,6 +124,7 @@ void buildDeck(card *deck){
 // void shuffleDeck(card *deck);
 // Shuffles the cards in a given deck 
 
+
 // void dealCards(card deck[], card p1[], card p2[]);
 // Deals cards to the two players
 void dealCards(card deck[], card p1[], card p2[]) {
@@ -143,6 +145,7 @@ void dealCards(card deck[], card p1[], card p2[]) {
           deckNum -= 1;
      }
 }
+
 
 // void sortCards(card *player1, card *player2);
 // Sorts cards that are given to the players in descending order
@@ -168,6 +171,7 @@ void sortCards(card p1[], card p2[]) {
      }
 }
 
+
 // void loadDeck(card *deck, FILE *file);
 // Loads a deck from a preset file for testing purposes as defined in the project description
 void loadDeck(card *deck, FILE *file){
@@ -176,6 +180,7 @@ void loadDeck(card *deck, FILE *file){
           fscanf(file,"%d %[^\n]",&deck[i].value,deck[i].action);
      }
 }
+
 
 //void initializeCards(card *player1, card *player2, card *deck, card *centerRow)
 // initializes card arrays for card type struct
