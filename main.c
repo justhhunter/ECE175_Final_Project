@@ -147,6 +147,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
    // prints center row to console
    // prints top of cards
    for(int i = 0; i < 7; i++){
+     if(centerRow[i].value == 0){continue;}
       if(centerRow[i].value > 9){printf("-");}// prints extra incase of double digits in card number
       printf("-");
       for(int j = strlen(centerRow[i].action) + 3; j > 0; j--){
