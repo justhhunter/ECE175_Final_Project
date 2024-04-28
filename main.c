@@ -33,7 +33,8 @@ int main(){
           printf("Sorry not a valid choice, 1 for new deck, 2 to load deck from file:");
           scanf("%d",&playerChoice);
      }
-     
+     // initialize cards
+     initializeCards(player1,player2,deck,centerRow);
 
      if(playerChoice == 1){
         // build new deck
@@ -53,11 +54,9 @@ int main(){
          
 
       
-      
-     // initialize cards
-     initializeCards(player1,player2,deck,centerRow);
+
      // deal cards to each player
-     
+     dealCards(deck, player1, player2);
      
      // sort each players hand
      
@@ -300,12 +299,14 @@ void dealCards(card deck[], card p1[], card p2[]) {
      int deckNum = 83;
      for(i = 0; i < 7; i++) {
           //change the player's respective card to the value in the deck, then indicate that the card is no longer in the deck
-          p1[i] = deck[deckNum];
+          strcpy(p1[i].action, deck[deckNum].action);
+          p1[i].value = deck[deckNum].value;
           deck[deckNum].value = 0;
           strcpy(deck[deckNum].action, "placeholder");
           deckNum -= 1;
           
-          p2[i] = deck[deckNum];
+          strcpy(p2[i].action, deck[deckNum].action);
+          p2[i].value = deck[deckNum].value;
           deck[deckNum].value = 0;
           strcpy(deck[deckNum].action, "placeholder");
           deckNum -= 1;
