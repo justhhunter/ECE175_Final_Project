@@ -370,7 +370,7 @@ void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
      for (int j = 0; j < size; j++) {
         player1[j].value = 0;              
         strcpy(player1[j].action, "placeholder"); 
-        player1[j].isProtected = 1;
+        player1[j].isProtected = 0;
      }
 
      
