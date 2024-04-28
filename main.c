@@ -113,7 +113,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
    // prints card information
    for(int i = 0; i < 7; i++){
       printf("|");
-      printf("%d %s", player1[i].value, player2[i].action);
+      printf("%d %s", player1[i].value, player1[i].action);
       printf("| ");
       }
 
