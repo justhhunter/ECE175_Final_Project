@@ -39,7 +39,8 @@ int main(){
      if(playerChoice == 1){
         // build new deck
         buildDeck(deck);
-          // shuffle cards
+          // shuffle deck
+          
      }else if(playerChoice == 2){
            // load deck from file
           // check file is correctly opened
@@ -52,7 +53,7 @@ int main(){
           fclose(file); // close file after use
      }
          
-
+     
       
 
      // deal cards to each player
