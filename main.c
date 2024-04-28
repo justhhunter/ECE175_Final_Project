@@ -142,7 +142,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
    printf("\n");
       
    printf("\n");
-   printf("center row: ");
+   printf("center row:\n");
    // prints center row to console
    // prints top of cards
    for(int i = 0; i < 7; i++){
