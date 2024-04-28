@@ -6,6 +6,7 @@
 typedef struct {
      int value;
      char action[15];
+     int isProtected;
 } card;
 
 
