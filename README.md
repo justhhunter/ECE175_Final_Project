@@ -30,13 +30,21 @@ the center row
 abilities: 
 
 shift2right: move one of your cards two positions to the right
+
 protect: protects your card to prevent it from being lost, but ifyou move it it loses protection
+
 shift2left: move one of your cards two positions to the left
+
 swapAdjascent: exchange two cards in your hand that are next to eachother
+
 removemiddle: takes away the middle card from all players, they are added to centerrow
+
 if protected the card wont be removed, also players draw cards to replace removed ones
+
 removeright: same as remove middle just for farthest right card
+
 removeleft: same as remove middle just for farthest left card
+
 swapskip1card: ??? swap 2 cards with a card in the middle between them
 
 
