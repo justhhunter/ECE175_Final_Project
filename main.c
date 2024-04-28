@@ -159,6 +159,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
 
    // prints partial of card body
    for(int i = 0; i < 7; i++){
+     if(centerRow[i].value == 0){break;}
       printf("|");
       if(centerRow[i].value > 9){printf(" ");}
       for(int j = strlen(centerRow[i].action) + 2; j > 0; j--){
@@ -171,6 +172,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
 
    // prints card information
    for(int i = 0; i < 7; i++){
+     if(centerRow[i].value == 0){break;}
       printf("|");
       printf("%d %s", centerRow[i].value, centerRow[i].action);
       printf("| ");
@@ -179,6 +181,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
    printf("\n");
    // prints partial of card body
    for(int i = 0; i < 7; i++){
+     if(centerRow[i].value == 0){break;}
       printf("|");
       if(centerRow[i].value > 9){printf(" ");}
       for(int j = strlen(centerRow[i].action) + 2; j > 0; j--){
@@ -191,6 +194,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
       
    // prints bottom of cards
    for(int i = 0; i < 7; i++){
+     if(centerRow[i].value == 0){break;}
       printf("-");
       if(centerRow[i].value > 9){printf("-");}
       for(int j = strlen(centerRow[i].action) + 3; j > 0; j--){
