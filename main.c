@@ -85,6 +85,133 @@ int main(){
 
 
 
+
+// void takeTurn(card *player, card *centerSpace, card *deck);
+// Allows player to take their turn
+
+// void buildDeck(card *deck);
+// Creates a deck using a card array of size 84
+void buildDeck(card *deck){
+
+      int actionNum = 0;
+      int modNum = 0;
+     // iterate through entire deck to initialize cards
+     for(int i = 0; i < 84; i++){
+          deck[i].value = i+1;
+          // modulus actionNum to rotate through 8 abilities for assignment
+          actionNum++;
+          modNum = actionNum % 8;
+
+          // switch between all 8 abilities
+          switch(modNum){
+             case 1: strcpy(deck[i].action,"shift2Right"); break;
+             case 2: strcpy(deck[i].action,"protect"); break;
+             case 3: strcpy(deck[i].action,"shift2Left"); break;
+             case 4: strcpy(deck[i].action,"swapAdjacent"); break;
+             case 5: strcpy(deck[i].action,"removeMiddle"); break;
+             case 6: strcpy(deck[i].action,"removeRight"); break;
+             case 7: strcpy(deck[i].action,"removeLeft"); break;
+             case 8: strcpy(deck[i].action,"swapSkip1Card"); break;
+             
+             }
+          
+          
+     }
+     
+}
+
+// void shuffleDeck(card *deck);
+// Shuffles the cards in a given deck 
+
+// void dealCards(card deck[], card p1[], card p2[]);
+// Deals cards to the two players
+void dealCards(card deck[], card p1[], card p2[]) {
+     int i;
+     int deckNum = 83;
+     for(i = 0; i < 7; i++) {
+          //change the player's respective card to the value in the deck, then indicate that the card is no longer in the deck
+          strcpy(p1[i].action, deck[deckNum].action);
+          p1[i].value = deck[deckNum].value;
+          deck[deckNum].value = 0;
+          strcpy(deck[deckNum].action, "placeholder");
+          deckNum -= 1;
+          
+          strcpy(p2[i].action, deck[deckNum].action);
+          p2[i].value = deck[deckNum].value;
+          deck[deckNum].value = 0;
+          strcpy(deck[deckNum].action, "placeholder");
+          deckNum -= 1;
+     }
+}
+
+// void sortCards(card *player1, card *player2);
+// Sorts cards that are given to the players in descending order
+void sortCards(card p1[], card p2[]) {
+     int i,j;
+     int deckSize = 84;
+     card temp;
+     for (i = 1; i < deckSize; i++) {
+          j = i;
+          while (j > 0 && p1[j].value > p1[j - 1].value) {
+               temp = p1[j];
+               p1[j] = p1[j - 1];
+               p1[j - 1] = temp;
+               --j;
+          }
+          j =i;
+          while (j > 0 && p2[j].value > p2[j - 1].value) {
+               temp = p2[j];
+               p2[j] = p2[j - 1];
+               p2[j - 1] = temp;
+               --j;
+          }
+     }
+}
+
+// void loadDeck(card *deck, FILE *file);
+// Loads a deck from a preset file for testing purposes as defined in the project description
+void loadDeck(card *deck, FILE *file){
+     // iterate through entire file and assign to deck value and actions
+     for(int i = 0; i < 84; i++){
+          fscanf(file,"%d %[^\n]",&deck[i].value,deck[i].action);
+     }
+}
+
+//void initializeCards(card *player1, card *player2, card *deck, card *centerRow)
+// initializes card arrays for card type struct
+void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
+     int size = 84;
+     for (int i = 0; i < size; i++) {
+        deck[i].value = 0;               
+        strcpy(deck[i].action, "placeholder"); 
+
+     }
+     
+     size = 7;
+     for (int j = 0; j < size; j++) {
+        player1[j].value = 0;              
+        strcpy(player1[j].action, "placeholder"); 
+        player1[j].isProtected = 0;
+     }
+
+     
+     for (int k = 0; k < size; k++) {
+        player2[k].value = 0;              
+        strcpy(player2[k].action, "placeholder"); 
+        player2[k].isProtected = 0;
+     }
+
+     size = 8;
+     for (int h = 0; h < size; h++) {
+        centerRow[h].value = 0;             
+        strcpy(centerRow[h].action, "placeholder"); 
+
+     }
+}
+
+
+
+
 // void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards in both players hands and the center row
 void printCards(card player1[], card player2[], card centerRow[]){
@@ -262,128 +389,4 @@ void printCards(card player1[], card player2[], card centerRow[]){
       printf(" ");
    }
    printf("\n");
-}
-
-
-// void takeTurn(card *player, card *centerSpace, card *deck);
-// Allows player to take their turn
-
-// void buildDeck(card *deck);
-// Creates a deck using a card array of size 84
-void buildDeck(card *deck){
-
-      int actionNum = 0;
-      int modNum = 0;
-     // iterate through entire deck to initialize cards
-     for(int i = 0; i < 84; i++){
-          deck[i].value = i+1;
-          // modulus actionNum to rotate through 8 abilities for assignment
-          actionNum++;
-          modNum = actionNum % 8;
-
-          // switch between all 8 abilities
-          switch(modNum){
-             case 1: strcpy(deck[i].action,"shift2Right"); break;
-             case 2: strcpy(deck[i].action,"protect"); break;
-             case 3: strcpy(deck[i].action,"shift2Left"); break;
-             case 4: strcpy(deck[i].action,"swapAdjacent"); break;
-             case 5: strcpy(deck[i].action,"removeMiddle"); break;
-             case 6: strcpy(deck[i].action,"removeRight"); break;
-             case 7: strcpy(deck[i].action,"removeLeft"); break;
-             case 8: strcpy(deck[i].action,"swapSkip1Card"); break;
-             
-             }
-          
-          
-     }
-     
-}
-
-// void shuffleDeck(card *deck);
-// Shuffles the cards in a given deck 
-
-// void dealCards(card deck[], card p1[], card p2[]);
-// Deals cards to the two players
-void dealCards(card deck[], card p1[], card p2[]) {
-     int i;
-     int deckNum = 83;
-     for(i = 0; i < 7; i++) {
-          //change the player's respective card to the value in the deck, then indicate that the card is no longer in the deck
-          strcpy(p1[i].action, deck[deckNum].action);
-          p1[i].value = deck[deckNum].value;
-          deck[deckNum].value = 0;
-          strcpy(deck[deckNum].action, "placeholder");
-          deckNum -= 1;
-          
-          strcpy(p2[i].action, deck[deckNum].action);
-          p2[i].value = deck[deckNum].value;
-          deck[deckNum].value = 0;
-          strcpy(deck[deckNum].action, "placeholder");
-          deckNum -= 1;
-     }
-}
-
-// void sortCards(card *player1, card *player2);
-// Sorts cards that are given to the players in descending order
-void sortCards(card p1[], card p2[]) {
-     int i,j;
-     int deckSize = 84;
-     card temp;
-     for (i = 1; i < deckSize; i++) {
-          j = i;
-          while (j > 0 && p1[j].value > p1[j - 1].value) {
-               temp = p1[j];
-               p1[j] = p1[j - 1];
-               p1[j - 1] = temp;
-               --j;
-          }
-          j =i;
-          while (j > 0 && p2[j].value > p2[j - 1].value) {
-               temp = p2[j];
-               p2[j] = p2[j - 1];
-               p2[j - 1] = temp;
-               --j;
-          }
-     }
-}
-
-// void loadDeck(card *deck, FILE *file);
-// Loads a deck from a preset file for testing purposes as defined in the project description
-void loadDeck(card *deck, FILE *file){
-     // iterate through entire file and assign to deck value and actions
-     for(int i = 0; i < 84; i++){
-          fscanf(file,"%d %[^\n]",&deck[i].value,deck[i].action);
-     }
-}
-
-//void initializeCards(card *player1, card *player2, card *deck, card *centerRow)
-// initializes card arrays for card type struct
-void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
-     int size = 84;
-     for (int i = 0; i < size; i++) {
-        deck[i].value = 0;               
-        strcpy(deck[i].action, "placeholder"); 
-
-     }
-     
-     size = 7;
-     for (int j = 0; j < size; j++) {
-        player1[j].value = 0;              
-        strcpy(player1[j].action, "placeholder"); 
-        player1[j].isProtected = 0;
-     }
-
-     
-     for (int k = 0; k < size; k++) {
-        player2[k].value = 0;              
-        strcpy(player2[k].action, "placeholder"); 
-        player2[k].isProtected = 0;
-     }
-
-     size = 8;
-     for (int h = 0; h < size; h++) {
-        centerRow[h].value = 0;             
-        strcpy(centerRow[h].action, "placeholder"); 
-
-     }
 }
