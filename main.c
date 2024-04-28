@@ -78,43 +78,186 @@ int main(){
 }
 
 
+// void startGame(card player1[], card player2[], card deck[], card centerRow[]);
 
 
 
 // void printCards(card *player1, card *player2, card *centerRow);
 // Prints all the cards in both players hands and the center row
-void printCards(card *player1, card *player2, card *centerRow){
-     printf("\n");// newline to separate rows of cards
-   printf("player1s hand: ");
-   // prints all player 2s cards to console
-   for(int i = 0; i < 7; i++){
-      printf("%d %s", player2[i].value, player2[i].action);
-      printf("  ");
-      }
-      
-   printf("\n");// newline to separate rows of cards
-   printf("center row: ");
-   
-   // prints all center row cards to console
-   for(int j = 0; j < 8; j++){
-      if(centerRow[j].value != 0){
-         printf("%d %s", centerRow[j].value, centerRow[j].action);
-         printf("  ");
-         }
-      }
-      
-   printf("\n");// newline to separate rows of cards
-   printf("player2s hand: ");
-   
+void printCards(card player1[], card player2[], card centerRow[]){
+
+   printf("\n");
+   printf("player1s hand:\n");
    // prints all player 1s cards to console
-   for(int k = 0; k < 7; k++){
-      printf("%d %s", player1[k].value, player1[k].action);
-      printf("  ");
+   // prints top of cards
+   for(int i = 0; i < 7; i++){
+      if(player1[i].value > 9){printf("-");}// prints extra incase of double digits in card number
+      printf("-");
+      for(int j = strlen(player1[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(player1[i].value > 9){printf(" ");}
+      for(int j = strlen(player1[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints card information
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      printf("%d %s", player1[i].value, player2[i].action);
+      printf("| ");
       }
       
-   printf("\n");// newline to separate rows of cards
+   printf("\n");
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(player1[i].value > 9){printf(" ");}
+      for(int j = strlen(player1[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+      
+   // prints bottom of cards
+   for(int i = 0; i < 7; i++){
+      printf("-");
+      if(player1[i].value > 9){printf("-");}
+      for(int j = strlen(player1[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
+      
+   printf("\n");
+   printf("center row: ");
+   // prints center row to console
+   // prints top of cards
+   for(int i = 0; i < 7; i++){
+      if(centerRow[i].value > 9){printf("-");}// prints extra incase of double digits in card number
+      printf("-");
+      for(int j = strlen(centerRow[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(centerRow[i].value > 9){printf(" ");}
+      for(int j = strlen(centerRow[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints card information
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      printf("%d %s", centerRow[i].value, centerRow[i].action);
+      printf("| ");
+      }
+      
+   printf("\n");
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(centerRow[i].value > 9){printf(" ");}
+      for(int j = strlen(centerRow[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+      
+   // prints bottom of cards
+   for(int i = 0; i < 7; i++){
+      printf("-");
+      if(centerRow[i].value > 9){printf("-");}
+      for(int j = strlen(centerRow[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
+      printf("\n");
+   printf("player2s hand:\n");
+   // prints all player 2s cards to console
+   // prints top of cards
+   for(int i = 0; i < 7; i++){
+      if(player2[i].value > 9){printf("-");}// prints extra incase of double digits in card number
+      printf("-");
+      for(int j = strlen(player2[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(player2[i].value > 9){printf(" ");}
+      for(int j = strlen(player2[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+
+   // prints card information
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      printf("%d %s", player2[i].value, player2[i].action);
+      printf("| ");
+      }
+      
+   printf("\n");
+   // prints partial of card body
+   for(int i = 0; i < 7; i++){
+      printf("|");
+      if(player2[i].value > 9){printf(" ");}
+      for(int j = strlen(player2[i].action) + 2; j > 0; j--){
+         printf(" ");
+      }
+      printf("|");
+      printf(" ");
+   }
+   printf("\n");
+      
+   // prints bottom of cards
+   for(int i = 0; i < 7; i++){
+      printf("-");
+      if(player2[i].value > 9){printf("-");}
+      for(int j = strlen(player2[i].action) + 3; j > 0; j--){
+         printf("-");
+      }
+      printf(" ");
+   }
+   printf("\n");
       
    }
+
 
 // void takeTurn(card *player, card *centerSpace, card *deck);
 // Allows player to take their turn
