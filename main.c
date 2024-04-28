@@ -17,6 +17,7 @@ void loadDeck(card *deck, FILE *file);
 void sortCards(card *player1, card *player2);
 void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
 
+
 int main(){
      // declare and initialize variables
      card deck[84];
@@ -61,7 +62,8 @@ int main(){
      dealCards(deck, player1, player2);
      
      // sort each players hand
-     
+
+
      printCards(player1,player2,centerRow);
      
       // go through initial game rules/start game
@@ -89,9 +91,10 @@ void printCards(card player1[], card player2[], card centerRow[]){
 
    printf("\n");
    printf("player1s hand:\n");// prints all player 1s cards to console
+   printf("\n");
    for(int i = 0; i < 7; i++){// prints top of cards
       if(player1[i].value > 9){printf("-");}// prints extra incase of double digits in card number
-      printf("-");
+      if(player1[i].isProtected == 1){printf("P");}else{printf("-");}
       for(int j = strlen(player1[i].action) + 3; j > 0; j--){
          printf("-");
       }
@@ -360,25 +363,27 @@ void initializeCards(card *player1, card *player2, card *deck, card *centerRow){
      for (int i = 0; i < size; i++) {
         deck[i].value = 0;               
         strcpy(deck[i].action, "placeholder"); 
+
      }
      
      size = 7;
      for (int j = 0; j < size; j++) {
         player1[j].value = 0;              
         strcpy(player1[j].action, "placeholder"); 
-          player1[j].isProtected = 0;
+        player1[j].isProtected = 1;
      }
 
      
      for (int k = 0; k < size; k++) {
         player2[k].value = 0;              
         strcpy(player2[k].action, "placeholder"); 
-          player2[k].isProtected = 0;
+        player2[k].isProtected = 0;
      }
 
      size = 8;
      for (int h = 0; h < size; h++) {
         centerRow[h].value = 0;             
         strcpy(centerRow[h].action, "placeholder"); 
+
      }
 }
