@@ -87,10 +87,8 @@ int main(){
 void printCards(card player1[], card player2[], card centerRow[]){
 
    printf("\n");
-   printf("player1s hand:\n");
-   // prints all player 1s cards to console
-   // prints top of cards
-   for(int i = 0; i < 7; i++){
+   printf("player1s hand:\n");// prints all player 1s cards to console
+   for(int i = 0; i < 7; i++){// prints top of cards
       if(player1[i].value > 9){printf("-");}// prints extra incase of double digits in card number
       printf("-");
       for(int j = strlen(player1[i].action) + 3; j > 0; j--){
@@ -118,7 +116,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
       printf("%d %s", player1[i].value, player2[i].action);
       printf("| ");
       }
-      
+
    printf("\n");
    // prints partial of card body
    for(int i = 0; i < 7; i++){
@@ -255,8 +253,7 @@ void printCards(card player1[], card player2[], card centerRow[]){
       printf(" ");
    }
    printf("\n");
-      
-   }
+}
 
 
 // void takeTurn(card *player, card *centerSpace, card *deck);
