@@ -14,7 +14,7 @@ void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
 void loadDeck(card *deck, FILE *file);
-void sortCards(card *player1, card *player2);
+void sortCards(card p1[], card p2[]);
 void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
 
 
