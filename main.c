@@ -65,6 +65,7 @@ int main(){
      
      // sort each players hand
       //sortCards(player1,player2);
+     printCards(player1,player2,centerRow);
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
      
