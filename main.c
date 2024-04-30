@@ -65,7 +65,7 @@ int main(){
      
      // sort each players hand
       //sortCards(player1,player2);
-     printCards(player1,player2,centerRow);
+      printCards(player1,player2,centerRow);
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
      
@@ -81,6 +81,7 @@ int main(){
   
   return 0;
 }
+
 
 
 
@@ -104,6 +105,8 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
                if(replacement == player1[j].value){
                   player1[j].value = deck[i].value;
                   strcpy(player1[j].action,deck[i].action);
+                  deck[i].value = 0;
+                  strcpy(deck[i].action,"placeholder");
                   break;
                   }
                }
@@ -116,7 +119,25 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
       if(deck[k].value == 0){
          continue;
          }else{
-            printf("\nPlayer2 draws two cards\nYou have pulled %d %s and %d %s cards!",deck[k].value,deck[k].action,deck[k+1].value,deck[k+1].action);
+            int p2Choice = 0;
+            int p2handremovenum = 0;
+            printf("\nPlayer2 draws two cards\nYou have pulled %d %s and %d %s cards!",deck[k].value,deck[k].action,deck[k-1].value,deck[k-1].action);
+            printf("\nPlayer2 choose one of the cards:");
+            scanf("%d",&p2Choice);
+            printf("Choose a card from your hand to discard:");
+            scanf("%d",&p2handremovenum);
+            for(int h = 0; h < 7; h++){
+               if(p2handremovenum == player2[h].value){// search through hand to replace with new card
+                  player2[h].value = p2Choice;
+                  for(int i = 83; i > 0; i--){
+                     if(deck[i].value == p2Choice){
+                        strcpy(player2[h].action,deck[i].action);
+                        deck[i].value == 0;
+                        strcpy(deck[i].action,"placeholder");
+                        }
+                     }
+                  }
+               }
             break;
             }
       }
