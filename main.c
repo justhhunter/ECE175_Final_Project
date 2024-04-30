@@ -68,6 +68,7 @@ int main(){
 
      // sort each players hand
       //sortCards(player1,player2);
+     sortCards(player1, player2);
       printCards(player1,player2,centerRow);
       // start game
       startGame(player1, player2, deck, centerRow);
@@ -235,21 +236,34 @@ void dealCards(card deck[], card p1[], card p2[]) {
 // Sorts cards that are given to the players in descending order
 void sortCards(card p1[], card p2[]) {
      int i,j;
-     int deckSize = 84;
+     int handSize = 7;
      card temp;
-     for (i = 1; i < deckSize; i++) {
+     temp.value = 0;
+     strcpy(temp.action, "tempAction");
+     
+     for (i = 1; i < handSize; i++) {
           j = i;
           while (j > 0 && p1[j].value > p1[j - 1].value) {
-               temp = p1[j];
-               p1[j] = p1[j - 1];
-               p1[j - 1] = temp;
+               temp.value = p1[j].value;
+               strcpy(temp.action, p1[j].action);
+
+               p1[j].value = p1[j - 1].value;
+               strcpy(p1[j].action, p1[j-1].action);
+
+               p1[j - 1].value = temp.value;
+               strcpy(p1[j-1].action, temp.action);
                --j;
           }
-          j =i;
+          j = i;
           while (j > 0 && p2[j].value > p2[j - 1].value) {
-               temp = p2[j];
-               p2[j] = p2[j - 1];
-               p2[j - 1] = temp;
+               temp.value = p2[j].value;
+               strcpy(temp.action, p2[j].action);
+               
+               p2[j].value = p2[j - 1].value;
+               strcpy(p2[j].action, p2[j-1].action);
+               
+               p2[j - 1].value = temp.value;
+               strcpy(p2[j-1].action, temp.action);
                --j;
           }
      }
