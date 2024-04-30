@@ -14,8 +14,10 @@ void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
 void loadDeck(card *deck, FILE *file);
-void sortCards(card p1[], card p2[]);
+void sortCards(card *player1, card *player2);
 void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
+void startGame(card player1[], card player2[], card deck[], card centerRow[]);
+
 
 
 int main(){
@@ -62,17 +64,16 @@ int main(){
      dealCards(deck, player1, player2);
      
      // sort each players hand
-     sortCards(player1, player2);
 
+      startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
      
-      // go through initial game rules/start game
-     // player 1 draws and replaces card
-     // player 2 draws two cards and discards one
-
+     // start game by doing initial moves for players
+     // startGame(player1, player2, deck, centerRow);
+      
 
      //  while loop to let game go continuously
-
+   // while(such and such is true){}
 
 
 
@@ -81,8 +82,33 @@ int main(){
 }
 
 
-// void startGame(card player1[], card player2[], card deck[], card centerRow[]);
 
+
+// void startGame(card player1[], card player2[], card deck[], card centerRow[]);
+// Does the initial player 1 and player 2 moves to initiate the game
+void startGame(card player1[], card player2[], card deck[], card centerRow[]){
+   printf("***************GAMESTART***************\nDeck has been shuffled and the cards have been dealt\n");
+   // player 1 draw card
+   for(int i = 83; i > 0; i--){
+      if(deck[i].value == 0)
+         {continue;}else{ // check for cards in deck
+            int replacement = 0;
+            // take input for card number from user
+            printf("PLayer1 pulls a card to start the game\nYou have pulled %d %s card!", deck[i].value,deck[i].action);
+            printf("\nPlayer 1 enter the number of the card you would like to replace: ");
+            scanf("%d", &replacement);
+            // search through players hand and replace with new card
+            for(int j = 0; j < 7; j++){
+               if(replacement == player1[j].value){
+                  player1[j].value = deck[i].value;
+                  strcpy(player1[replacement].action,deck[i].action);
+                  break;
+                  }
+               }
+            break;
+         }
+      }
+   }
 
 
 
@@ -151,9 +177,9 @@ void dealCards(card deck[], card p1[], card p2[]) {
 // Sorts cards that are given to the players in descending order
 void sortCards(card p1[], card p2[]) {
      int i,j;
-     int handSize = 7;
+     int deckSize = 84;
      card temp;
-     for (i = 1; i < handSize; i++) {
+     for (i = 1; i < deckSize; i++) {
           j = i;
           while (j > 0 && p1[j].value > p1[j - 1].value) {
                temp = p1[j];
