@@ -101,9 +101,14 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
             for(int j = 0; j < 7; j++){
                if(replacement == player1[j].value){
                   player1[j].value = deck[i].value;
-                  strcpy(player1[replacement].action,deck[i].action);
+                  strcpy(player1[j].action,deck[i].action);
                   break;
-                  }
+                  }else{// swap with position zero as default if user doesnt enter usable input
+                  player1[0].value = deck[i].value;
+                  strcpy(player1[0].action,deck[i].action);
+                  break;
+                     
+                     }
                }
             break;
          }
