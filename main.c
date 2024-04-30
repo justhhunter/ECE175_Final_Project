@@ -64,7 +64,7 @@ int main(){
      dealCards(deck, player1, player2);
      
      // sort each players hand
-
+      //sortCards(player1,player2);
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
      
@@ -87,7 +87,8 @@ int main(){
 // void startGame(card player1[], card player2[], card deck[], card centerRow[]);
 // Does the initial player 1 and player 2 moves to initiate the game
 void startGame(card player1[], card player2[], card deck[], card centerRow[]){
-   printf("***************GAMESTART***************\nDeck has been shuffled and the cards have been dealt\n");
+   printf("\n***************GAMESTART***************\nDeck has been shuffled and the cards have been dealt\n");
+   int j = 0;
    // player 1 draw card
    for(int i = 83; i > 0; i--){
       if(deck[i].value == 0)
@@ -103,16 +104,25 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
                   player1[j].value = deck[i].value;
                   strcpy(player1[j].action,deck[i].action);
                   break;
-                  }else{// swap with position zero as default if user doesnt enter usable input
-                  player1[0].value = deck[i].value;
-                  strcpy(player1[0].action,deck[i].action);
-                  break;
-                     
-                     }
+                  }
                }
             break;
          }
       }
+      
+   // player 2 draw 2 cards and pick one
+   for(int k = 83; k > 0; k--){
+      if(deck[k].value == 0){
+         continue;
+         }else{
+            printf("\nPlayer2 draws two cards\nYou have pulled %d %s and %d %s cards!",deck[k].value,deck[k].action,deck[k+1].value,deck[k+1].action);
+            break;
+            }
+      }
+      
+   
+   
+      
    }
 
 
