@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdlib.h>
+#include <time.h>
 
 
 typedef struct {
@@ -17,6 +18,7 @@ void loadDeck(card *deck, FILE *file);
 void sortCards(card *player1, card *player2);
 void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
 void startGame(card player1[], card player2[], card deck[], card centerRow[]);
+void shuffleDeck(card *deck);
 
 
 
@@ -61,13 +63,15 @@ int main(){
       
 
      // deal cards to each player
+     shuffleDeck(deck);
      dealCards(deck, player1, player2);
-     
+
      // sort each players hand
       //sortCards(player1,player2);
       printCards(player1,player2,centerRow);
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
+     //printf("\n%s,%d",player2[3].action,player2[3].value);
      
      // start game by doing initial moves for players
      // startGame(player1, player2, deck, centerRow);
@@ -185,7 +189,18 @@ void buildDeck(card *deck){
 }
 
 // void shuffleDeck(card *deck);
-// Shuffles the cards in a given deck 
+// Shuffles the cards in a given deck of 84 cards
+void shuffleDeck(card *deck) {
+   int n = 84;
+    for (int i = n - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        
+        // swap cards using temp
+        card temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
 
 
 // void dealCards(card deck[], card p1[], card p2[]);
@@ -216,32 +231,19 @@ void sortCards(card p1[], card p2[]) {
      int i,j;
      int deckSize = 84;
      card temp;
-     temp.value = 0;
-     strcpy(temp.value, "tempAction");
-     
      for (i = 1; i < deckSize; i++) {
           j = i;
           while (j > 0 && p1[j].value > p1[j - 1].value) {
-               temp.value = p1[j].value;
-               strcpy(temp.action, p1[j].action);
-
-               p1[j].value = p1[j - 1].value;
-               strcpy(p1[j].action, p1[j-1].action);
-
-               p1[j - 1].value = temp.value;
-               strcpy(p1[j-1].action, temp.action);
+               temp = p1[j];
+               p1[j] = p1[j - 1];
+               p1[j - 1] = temp;
                --j;
           }
           j =i;
           while (j > 0 && p2[j].value > p2[j - 1].value) {
-               temp.value = p2[j].value;
-               strcpy(temp.action, p2[j].action);
-               
-               p2[j].value = p2[j - 1].value;
-               strcpy(p2[j].action, p2[j-1].action);
-               
-               p2[j - 1].value = temp.value;
-               strcpy(p2[j-1].action, temp.action);
+               temp = p2[j];
+               p2[j] = p2[j - 1];
+               p2[j - 1] = temp;
                --j;
           }
      }
