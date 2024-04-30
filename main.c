@@ -46,7 +46,7 @@ int main(){
         // build new deck
         buildDeck(deck);
           // shuffle deck
-          
+         shuffleDeck(deck);
      }else if(playerChoice == 2){
            // load deck from file
           // check file is correctly opened
@@ -63,7 +63,7 @@ int main(){
       
 
      // deal cards to each player
-     shuffleDeck(deck);
+
      dealCards(deck, player1, player2);
 
      // sort each players hand
@@ -117,7 +117,7 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
             break;
          }
       }
-      
+      printCards(player1,player2,centerRow);
    // player 2 draw 2 cards and pick one
    for(int k = 83; k > 0; k--){
       if(deck[k].value == 0){
@@ -172,14 +172,14 @@ void buildDeck(card *deck){
 
           // switch between all 8 abilities
           switch(modNum){
-             case 1: strcpy(deck[i].action,"shift2Right"); break;
-             case 2: strcpy(deck[i].action,"protect"); break;
-             case 3: strcpy(deck[i].action,"shift2Left"); break;
-             case 4: strcpy(deck[i].action,"swapAdjacent"); break;
-             case 5: strcpy(deck[i].action,"removeMiddle"); break;
-             case 6: strcpy(deck[i].action,"removeRight"); break;
-             case 7: strcpy(deck[i].action,"removeLeft"); break;
-             case 8: strcpy(deck[i].action,"swapSkip1Card"); break;
+             case 0: strcpy(deck[i].action,"shift2Right"); break;
+             case 1: strcpy(deck[i].action,"protect"); break;
+             case 2: strcpy(deck[i].action,"shift2Left"); break;
+             case 3: strcpy(deck[i].action,"swapAdjacent"); break;
+             case 4: strcpy(deck[i].action,"removeMiddle"); break;
+             case 5: strcpy(deck[i].action,"removeRight"); break;
+             case 6: strcpy(deck[i].action,"removeLeft"); break;
+             case 7: strcpy(deck[i].action,"swapSkip1Card"); break;
              
              }
           
