@@ -69,16 +69,17 @@ int main(){
      // sort each players hand
       //sortCards(player1,player2);
       printCards(player1,player2,centerRow);
+      // start game
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
-     //printf("\n%s,%d",player2[3].action,player2[3].value);
-     
-     // start game by doing initial moves for players
-     // startGame(player1, player2, deck, centerRow);
-      
 
+     
+      
+      
      //  while loop to let game go continuously
-   // while(such and such is true){}
+      //for(int i = 84; i > -1;){
+         //
+
 
 
 
@@ -107,6 +108,8 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
             // search through players hand and replace with new card
             for(int j = 0; j < 7; j++){
                if(replacement == player1[j].value){
+                  centerRow[0].value = player1[j].value;
+                  strcpy(centerRow[0].action,player1[j].action);
                   player1[j].value = deck[i].value;
                   strcpy(player1[j].action,deck[i].action);
                   deck[i].value = 0;
@@ -132,6 +135,9 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
             scanf("%d",&p2handremovenum);
             for(int h = 0; h < 7; h++){
                if(p2handremovenum == player2[h].value){// search through hand to replace with new card
+               // move card to center row
+                  centerRow[1].value = player2[h].value;
+                  strcpy(centerRow[1].action,player2[h].action);
                   player2[h].value = p2Choice;
                   for(int i = 83; i > 0; i--){
                      if(deck[i].value == p2Choice){
