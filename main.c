@@ -25,10 +25,17 @@ void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
 int checkWinCondition(card *player);
-void swapAdjacent(card player[], int s);
-void swapSkip1Card(card player[], int s);
+void swapAdjacent(card player[], int i);
+void swapSkip1Card(card player[], int i);
 void shift2right(card *player);
 void shift2left(card *player);
+void removeMiddle(card *p1, card *p2, card *deck, card *centerRow);
+void removeLeft(card *p1, card *p2, card *deck, card *centerRow);
+void removeRight(card *p1, card *p2, card *deck, card *centerRow);
+void removeCenterRowCard(card *centerRow, int i);
+
+
+
 
 
 int main(){
@@ -91,6 +98,7 @@ int main(){
         int search = 0;
       // loop until cards in deck run out or someone wins
       while(winFlag == 0 && counter > 0){
+
         // player 1s turn
          printf("Player1 would you like to draw a card or use a card in the center row(Enter 0 to draw a card)? ");
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
@@ -135,11 +143,13 @@ int main(){
 
 
 
+
+
 // void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
 // checks what the cards ability is and uses it, takes in integer for the players turn
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
 
-    
+    centerRow[i].value = 0;
     int playerChoice = 0;
     int searchResult = 0;
 
@@ -163,19 +173,79 @@ void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRo
         swapAdjacent(currPlayer, searchResult);
     }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
         // call remove mid function
+        removeMiddle(currPlayer, oppositePlayer, deck, centerRow);
     }else if(strcmp("removeRight",centerRow[i].action) == 0){
         // call remove right function
+        removeRight(currPlayer, oppositePlayer, deck, centerRow);
     }else if(strcmp("removeLeft",centerRow[i].action) == 0){
         // call remove left function
+        removeLeft(currPlayer, oppositePlayer, deck, centerRow);
     }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
         // call swap skip 1 card function
         printf("Which card would you like to swap skip?");
-        scanf("%d");
+        scanf("%d",&playerChoice);
         searchResult = searchCards(currPlayer,playerChoice,7);
         swapSkip1Card(currPlayer, searchResult);
     }
 }
 
+//void removeLeft(card *p1, card *p2, card *deck, card *centerRow)
+void removeLeft(card *p1, card *p2, card *deck, card *centerRow){
+    int icenter = countCards(centerRow,8);
+    int ideck = countCards(deck,84);
+
+
+    centerRow[icenter]= p1[0]; 
+    centerRow[icenter+1] = p2[0];
+    
+    p1[0] = deck[ideck];
+    p2[0] = deck[ideck-1];
+    
+    deck[ideck].value = 0;
+    deck[ideck].value = 0;
+    
+
+    
+}
+
+//void removeRight(card *p1, card *p2, card *deck, card *centerRow)
+void removeRight(card *p1, card *p2, card *deck, card *centerRow){
+    int icenter = countCards(centerRow,8);
+    int ideck = countCards(deck,84);
+
+    // set temps
+    centerRow[icenter]= p1[6]; 
+    centerRow[icenter+1] = p2[6];
+    
+    p1[6] = deck[ideck];
+    p2[6] = deck[ideck-1];
+    
+    deck[ideck].value = 0;
+    deck[ideck].value = 0;
+    
+
+    
+}
+
+
+//void removeMiddle(card *p1, card *p2, card *deck, card *centerRow)
+void removeMiddle(card *p1, card *p2, card *deck, card *centerRow){
+    int icenter = countCards(centerRow,8);
+    int ideck = countCards(deck,84);
+
+
+    centerRow[icenter]= p1[3]; 
+    centerRow[icenter+1] = p2[3];
+    
+    p1[3] = deck[ideck];
+    p2[3] = deck[ideck-1];
+    
+    deck[ideck].value = 0;
+    deck[ideck].value = 0;
+    
+
+    
+}
 
 
 // void shift2right(card *player)
@@ -233,101 +303,53 @@ void shift2left(card *player){
 
 
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
-void swapAdjacent(card player[], int s) {//s is swap index
-   card temp;
-   int position;
-   int a;//adjacent card index
-     
-   printf("Which adjacent card would you like to swap? Enter '0' for left, and '1' for right\n");
-   scanf("%d", &position);
-   
-   printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
-   printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
-   
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
-   
-   if (s != 0 || s != 6) {
-      if(position == 0) {//swaps with card on the left
-         a = s - 1;
-      }
-   
-      else if(position == 1) {//swaps with card on the right
-         a = s + 1;
-      }
-   }
-   
-   if (s == 0) {
-      a = s + 1;
-   }
-   
-   if (s == 6) {
-      a = s - 1;
-   }
-   
-   
-   temp.value = player[s].value;
-   strcpy(temp.action, player[s].action);
-   
-   player[s].value = player[a].value;
-   strcpy(player[s].action, player[a].action);
-   
-   player[a].value = temp.value;
-   strcpy(player[a].action, temp.action);
-   
-   player[s].isProtected = 0;
-   player[a].isProtected = 0;
+void swapAdjacent(card player[], int i) {
+    int choice;
+    if(i == 0){
+        // immediatly swap right since its at end
+        printf("Only possible to swap with the right adjacent card. Swapping now\n");
+        card temp = player[i];
+        player[i] = player[i + 1];
+        player[i + 1] = temp;
+    }else if(i == 6){
+        // immediatly swap left since its at end        
+        printf("Only possible to swap with the left adjacent card. Swapping now\n");
+        card temp = player[i];
+        player[i] = player[i - 1];
+        player[i - 1] = temp;
+    } else {
+        // Ask user for direction of the swap when not at the ends
+        printf("Do you want to swap with the left (enter 0) or right (enter 1)? ");
+        scanf("%d", &choice);
+
+        if (choice == 0) {  // Swap with left adjacent card
+                card temp = player[i];
+                player[i] = player[i - 1];
+                player[i - 1] = temp;
+                printf("Swapped with left adjacent card.\n");
+           
+        } else if (choice == 1) {  // Swap with right adjacent card
+                card temp = player[i];
+                player[i] = player[i + 1];
+                player[i + 1] = temp;
+                printf("Swapped with right adjacent card.\n");
+            
+            }
+        }
+
 }
 
-void swapSkip1Card(card player[], int s) {//s is swap index
-   card temp;
-   int position;
-   int a;//adjacent card index
-     
-   printf("Which adjacent card (one card between the two cards) would you like to swap? Enter '0' for left, and '1' for right\n");
-   scanf("%d", &position);
-   
-   printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
-   printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
-   
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
-   
-   if (s != 0 || s != 1 || s != 5 || s != 6) {
-      if(position == 0) {//swaps with card on the left
-         a = s - 2;
-      }
-   
-      else if(position == 1) {//swaps with card on the right
-         a = s + 2;
-      }
-   }
-   
-   if (s == 0 && s == 1) {
-      a = s + 2;
-   }
-   
-   if (s == 6 && s == 5) {
-      a = s - 2;
-   }
-   
-   
-   temp.value = player[s].value;
-   strcpy(temp.action, player[s].action);
-   
-   player[s].value = player[a].value;
-   strcpy(player[s].action, player[a].action);
-   
-   player[a].value = temp.value;
-   strcpy(player[a].action, temp.action);
-   
-   player[s].isProtected = 0;
-   player[a].isProtected = 0;
-   
+
+
+void swapSkip1Card(card player[], int i) {
+    // if on borders change it to 1 step inside
+    if(i == 6){i = 5;}
+    if(i == 0){i = 1;}
+
+    card temp = player[i - 1];    // Temporarily store the left card
+    player[i - 1] = player[i + 1]; // Swap the right card into the left card's position
+    player[i + 1] = temp;         // Place the left card in the right card's position
+
 }
 
 
