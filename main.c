@@ -22,7 +22,7 @@ void shuffleDeck(card *deck);
 int countCards(card *deck, int n);
 int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
-
+void protectCard(card *player, int i);
 
 
 int main(){
@@ -125,6 +125,11 @@ int main(){
   return 0;
 }
 
+// void protectCard(card *player, int i)
+void protectCard(card *player, int i){
+    player[i].isProtected = 1;
+    printf("%d",player[i].isProtected);
+}
 
 
 
