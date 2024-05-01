@@ -23,6 +23,7 @@ int countCards(card *deck, int n);
 int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
+void swapAdjacentCards(card player[], int swapIndex, int adjacentIndex);
 
 
 int main(){
@@ -129,6 +130,23 @@ int main(){
 void protectCard(card *player, int i){
     player[i].isProtected = 1;
     printf("%d",player[i].isProtected);
+}
+
+//void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
+void swapAdjacent(card player[], int s, int a) {//s is swap index, a is adjacent card index
+   card temp;
+   
+   temp.value = player[s].value;
+   strcpy(temp.action, player[s].action);
+   
+   player[s].value = player[a].value;
+   strcpy(player[s].action, player[a].action);
+   
+   player[a].value = temp.value;
+   strcpy(player[a].action, temp.action);
+   
+   player[s].isProtected = 0;
+   player[a].isProtected = 0;
 }
 
 
