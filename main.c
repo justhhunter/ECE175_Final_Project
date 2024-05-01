@@ -175,11 +175,6 @@ void swapAdjacent(card player[], int s) {//s is swap index
    printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
-   
    if (s != 0 || s != 6) {
       if(position == 0) {//swaps with card on the left
          a = s - 1;
@@ -222,11 +217,6 @@ void swapSkip1Card(card player[], int s) {//s is swap index
    
    printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
-   
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
    
    if (s != 0 || s != 1 || s != 5 || s != 6) {
       if(position == 0) {//swaps with card on the left
