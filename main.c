@@ -26,6 +26,9 @@ void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
 int checkWinCondition(card *player);
 void swapAdjacent(card player[], int s);
+void swapSkip1Card(card player[], int s);
+
+
 
 
 int main(){
@@ -159,31 +162,31 @@ void shift2left(card *player){
     
 }
 
+
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
 void swapAdjacent(card player[], int s) {//s is swap index
    card temp;
-   char position[5];
+   int position;
    int a;//adjacent card index
      
-   printf("Which adjacent card would you like to swap? (left/right)\n");
-   scanf(" %c ", position);
+   printf("Which adjacent card would you like to swap? Enter '0' for left, and '1' for right\n");
+   scanf("%d", &position);
    
    printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (strcmp(position, "done") != 0 || s != 0 || s != 6) {
-      if(strcmp(position, "left") == 0) {
+   while (position != 0 || position != 1) {
+      printf("Please enter either '0' for left, or '1' for right");
+      scanf("%d", &position);
+   }
+   
+   if (s != 0 || s != 6) {
+      if(position == 0) {//swaps with card on the left
          a = s - 1;
-         strcpy(position, "done");
       }
    
-      else if(strcmp(position, "right") == 0) {
+      else if(position == 1) {//swaps with card on the right
          a = s + 1;
-         strcpy(position, "done");
-      }
-   
-      else {
-         printf("Please enter 'left' or 'right'");
       }
    }
    
@@ -211,28 +214,27 @@ void swapAdjacent(card player[], int s) {//s is swap index
 
 void swapSkip1Card(card player[], int s) {//s is swap index
    card temp;
-   char position[5];
+   int position;
    int a;//adjacent card index
      
-   printf("Which adjacent card would you like to swap? (left/right)\n");
-   scanf(" %c ", position);
+   printf("Which adjacent card (one card between the two cards) would you like to swap? Enter '0' for left, and '1' for right\n");
+   scanf("%d", &position);
    
    printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (strcmp(position, "done") != 0 || s != 0 || s != 1 || s != 5 || s != 6) {
-      if(strcmp(position, "left") == 0) {
+   while (position != 0 || position != 1) {
+      printf("Please enter either '0' for left, or '1' for right");
+      scanf("%d", &position);
+   }
+   
+   if (s != 0 || s != 1 || s != 5 || s != 6) {
+      if(position == 0) {//swaps with card on the left
          a = s - 2;
-         strcpy(position, "done");
       }
    
-      else if(strcmp(position, "right") == 0) {
+      else if(position == 1) {//swaps with card on the right
          a = s + 2;
-         strcpy(position, "done");
-      }
-   
-      else {
-         printf("Please enter 'left' or 'right'");
       }
    }
    
@@ -307,6 +309,7 @@ void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRo
         // call remove left function
     }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
         // call swap skip 1 card function
+        swapSkip1Card(currPlayer, i);
     }
 }
 
