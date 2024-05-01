@@ -23,7 +23,7 @@ int countCards(card *deck, int n);
 int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
-void swapAdjacentCards(card player[], int swapIndex, int adjacentIndex);
+void swapAdjacent(card player[], int s)
 
 
 int main(){
@@ -133,8 +133,30 @@ void protectCard(card *player, int i){
 }
 
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
-void swapAdjacent(card player[], int s, int a) {//s is swap index, a is adjacent card index
+void swapAdjacent(card player[], int s) {//s is swap index
    card temp;
+   char position[5];
+   int a;//adjacent card index
+     
+   printf("Which adjacent card would you like to swap? (left/right)");
+   scanf(" %c ", position);
+   
+   while (strcmp(position, "done") != 0) {
+      if(strcmp(position, "left") == 0) {
+         a = s - 1;
+         strcpy(position, "done");
+      }
+   
+      else if(strcmp(position, "right") == 0) {
+         a = s + 1;
+         strcpy(position, "done");
+      }
+   
+      else {
+         printf("Please enter 'left' or 'right'");
+      }
+   }
+   
    
    temp.value = player[s].value;
    strcpy(temp.action, player[s].action);
