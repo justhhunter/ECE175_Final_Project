@@ -24,6 +24,7 @@ int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
+void swapAdjacent(card player[], int s);
 
 
 
@@ -169,7 +170,56 @@ void protectCard(card *player, int i){
     printf("%d",player[i].isProtected);
 }
 
-
+//void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
+void swapAdjacent(card player[], int s) {//s is swap index
+   card temp;
+   char position[5];
+   int a;//adjacent card index
+   int i = s; //placeholder variable to assure swapping cards are valid options
+     
+   printf("Which adjacent card would you like to swap? (left/right)\n");
+   scanf(" %c ", position);
+   
+   printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
+   printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
+   
+   while (strcmp(position, "done") != 0 && i != 0 && i != 6) {
+      if(strcmp(position, "left") == 0) {
+         a = s - 1;
+         strcpy(position, "done");
+      }
+   
+      else if(strcmp(position, "right") == 0) {
+         a = s + 1;
+         strcpy(position, "done");
+      }
+   
+      else {
+         printf("Please enter 'left' or 'right'");
+      }
+   }
+   
+   if (i == 0) {
+      a = i + 1;
+   }
+   
+   if (i == 6) {
+      a = i - 1;
+   }
+   
+   
+   temp.value = player[s].value;
+   strcpy(temp.action, player[s].action);
+   
+   player[s].value = player[a].value;
+   strcpy(player[s].action, player[a].action);
+   
+   player[a].value = temp.value;
+   strcpy(player[a].action, temp.action);
+   
+   player[s].isProtected = 0;
+   player[a].isProtected = 0;
+}
 
 //int searchCards(card *player, int value, int n)
 // searchs a hand for a certain card and returns index
