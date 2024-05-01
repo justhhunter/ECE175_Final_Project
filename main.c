@@ -26,7 +26,7 @@ void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
 int checkWinCondition(card *player);
 void swapAdjacent(card player[], int s);
-
+void swapSkip1Card(card player[], int s);
 
 int main(){
      // declare and initialize variables
@@ -137,7 +137,6 @@ void swapAdjacent(card player[], int s) {//s is swap index
    card temp;
    char position[5];
    int a;//adjacent card index
-   int i = s; //placeholder variable to assure swapping cards are valid options
      
    printf("Which adjacent card would you like to swap? (left/right)\n");
    scanf(" %c ", position);
@@ -145,7 +144,7 @@ void swapAdjacent(card player[], int s) {//s is swap index
    printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (strcmp(position, "done") != 0 && i != 0 && i != 6) {
+   while (strcmp(position, "done") != 0 || s != 0 || s != 6) {
       if(strcmp(position, "left") == 0) {
          a = s - 1;
          strcpy(position, "done");
@@ -162,11 +161,11 @@ void swapAdjacent(card player[], int s) {//s is swap index
    }
    
    if (i == 0) {
-      a = i + 1;
+      a = s + 1;
    }
    
    if (i == 6) {
-      a = i - 1;
+      a = s - 1;
    }
    
    
@@ -181,6 +180,56 @@ void swapAdjacent(card player[], int s) {//s is swap index
    
    player[s].isProtected = 0;
    player[a].isProtected = 0;
+}
+
+void swapSkip1Card(card player[], int s) {//s is swap index
+   card temp;
+   char position[5];
+   int a;//adjacent card index
+     
+   printf("Which adjacent card would you like to swap? (left/right)\n");
+   scanf(" %c ", position);
+   
+   printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
+   printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
+   
+   while (strcmp(position, "done") != 0 || s != 0 || s != 1 || s != 5 || s != 6) {
+      if(strcmp(position, "left") == 0) {
+         a = s - 2;
+         strcpy(position, "done");
+      }
+   
+      else if(strcmp(position, "right") == 0) {
+         a = s + 2;
+         strcpy(position, "done");
+      }
+   
+      else {
+         printf("Please enter 'left' or 'right'");
+      }
+   }
+   
+   if (s == 0 && s == 1) {
+      a = s + 2;
+   }
+   
+   if (s == 6 && s == 5) {
+      a = i - 2;
+   }
+   
+   
+   temp.value = player[s].value;
+   strcpy(temp.action, player[s].action);
+   
+   player[s].value = player[a].value;
+   strcpy(player[s].action, player[a].action);
+   
+   player[a].value = temp.value;
+   strcpy(player[a].action, temp.action);
+   
+   player[s].isProtected = 0;
+   player[a].isProtected = 0;
+   
 }
 
 // void checkWinCondition(card *player);
