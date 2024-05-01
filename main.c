@@ -27,8 +27,8 @@ void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRo
 int checkWinCondition(card *player);
 void swapAdjacent(card player[], int s);
 void swapSkip1Card(card player[], int s);
-
-
+void shift2right(card *player);
+void shift2left(card *player);
 
 
 int main(){
@@ -135,6 +135,71 @@ int main(){
 
 
 
+// void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
+// checks what the cards ability is and uses it, takes in integer for the players turn
+void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
+
+    
+    int playerChoice = 0;
+    int searchResult = 0;
+
+    if(strcmp("shift2Right",centerRow[i].action) == 0){
+        // call shift right function
+        shift2right(currPlayer);
+    }else if(strcmp("protect",centerRow[i].action) == 0){
+        printf("Which card would you like to protect?");
+        scanf("%d",&playerChoice);
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        // call protect function
+        protectCard(currPlayer,searchResult);
+    }else if(strcmp("shift2Left",centerRow[i].action) == 0){
+        // call shft2left function
+        shift2left(currPlayer);
+    }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
+        // call swapAdj function
+        printf("Which card would you like swap adjacent?");
+        scanf("%d",&playerChoice);
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        swapAdjacent(currPlayer, searchResult);
+    }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
+        // call remove mid function
+    }else if(strcmp("removeRight",centerRow[i].action) == 0){
+        // call remove right function
+    }else if(strcmp("removeLeft",centerRow[i].action) == 0){
+        // call remove left function
+    }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
+        // call swap skip 1 card function
+        swapSkip1Card(currPlayer, i);
+    }
+}
+
+
+
+// void shift2right(card *player)
+// shifts a card two to the right
+void shift2right(card *player) {
+    printf("Enter the number of the card you would like to shift 2 positions to the right\n");
+    int playerChoice;
+    scanf("%d", &playerChoice);
+    int search = searchCards(player, playerChoice, 7);
+
+    // Ensure index is valid for the shift
+    if (search > 4) {
+        search = 4;
+    }
+
+    // Use temporary storage to help in shifting
+    card temp = player[search]; // Store the chosen card
+
+    // Move the chosen card two places to the right
+    player[search] = player[search + 1];  // Move card from right one place to the left
+    player[search + 1] = player[search + 2];  // Move card from right two places to the position of right one
+
+    // Place the stored card in the new position, two places to the right
+    player[search + 2] = temp;
+
+
+}
 
 
 // void shift2left(card *player)
@@ -163,6 +228,7 @@ void shift2left(card *player){
 }
 
 
+
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
 void swapAdjacent(card player[], int s) {//s is swap index
    card temp;
@@ -174,6 +240,11 @@ void swapAdjacent(card player[], int s) {//s is swap index
    
    printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
+   
+   while (position != 0 || position != 1) {
+      printf("Please enter either '0' for left, or '1' for right");
+      scanf("%d", &position);
+   }
    
    if (s != 0 || s != 6) {
       if(position == 0) {//swaps with card on the left
@@ -218,6 +289,11 @@ void swapSkip1Card(card player[], int s) {//s is swap index
    printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
    
+   while (position != 0 || position != 1) {
+      printf("Please enter either '0' for left, or '1' for right");
+      scanf("%d", &position);
+   }
+   
    if (s != 0 || s != 1 || s != 5 || s != 6) {
       if(position == 0) {//swaps with card on the left
          a = s - 2;
@@ -251,6 +327,7 @@ void swapSkip1Card(card player[], int s) {//s is swap index
    
 }
 
+
 // void checkWinCondition(card *player);
 // Checks if a current players hand is a winning hand and ends game if yes
 // returns a 0 if no a 1 if yes
@@ -264,44 +341,6 @@ int checkWinCondition(card *player){
     return 1;
 }
 
-
-// void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
-// checks what the cards ability is and uses it, takes in integer for the players turn
-void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
-
-    
-    int playerChoice = 0;
-    int searchResult = 0;
-
-    if(strcmp("shift2Right",centerRow[i].action) == 0){
-        // call shift right function
-        
-    }else if(strcmp("protect",centerRow[i].action) == 0){
-        printf("Which card would you like to protect?");
-        scanf("%d",&playerChoice);
-        searchResult = searchCards(currPlayer,playerChoice,7);
-        // call protect function
-        protectCard(currPlayer,searchResult);
-    }else if(strcmp("shift2Left",centerRow[i].action) == 0){
-        // call shft2left function
-        shift2left(currPlayer);
-    }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
-        // call swapAdj function
-        printf("Which card would you like swap adjacent?");
-        scanf("%d",&playerChoice);
-        searchResult = searchCards(currPlayer,playerChoice,7);
-        swapAdjacent(currPlayer, searchResult);
-    }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
-        // call remove mid function
-    }else if(strcmp("removeRight",centerRow[i].action) == 0){
-        // call remove right function
-    }else if(strcmp("removeLeft",centerRow[i].action) == 0){
-        // call remove left function
-    }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
-        // call swap skip 1 card function
-        swapSkip1Card(currPlayer, i);
-    }
-}
 
 
 
