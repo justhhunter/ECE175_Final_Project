@@ -4,6 +4,10 @@
 #include <time.h>
 
 
+// Authors:
+// Hunter Copening
+// Andrew Ghartey 
+
 typedef struct {
      int value;
      char action[15];
