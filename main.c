@@ -23,7 +23,8 @@ int countCards(card *deck, int n);
 int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
-void swapAdjacent(card player[], int s)
+void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
+
 
 
 int main(){
@@ -92,13 +93,13 @@ int main(){
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
          scanf("%d", &playerEntry);
             search = searchCards(centerRow,playerEntry,8);
-         if(playerEntry == 1 || search == -1){
+         if(playerEntry == 1 || search == 0){
             // call draw card function to draw a card
             drawAndAssignCard(deck,centerRow,player1);
             }else{// check if other entry is a card in the centerRow
             // if yes then call that ability
             // have 8 different ability functions
-            continue;
+            takeTurn(deck,player1,player2,centerRow,search);
                }
         printCards(player1,player2,centerRow);
 
@@ -107,13 +108,13 @@ int main(){
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
          scanf("%d", &playerEntry);
             search = searchCards(centerRow,playerEntry,8);
-         if(playerEntry == 1 || search == -1){
+         if(playerEntry == 1 || search == 0){
             // call draw card function to draw a card
             drawAndAssignCard(deck,centerRow,player2);
             }else{// check if other entry is a card in the centerRow
             // if yes then call that ability
             // have 8 different ability functions
-            continue;
+                takeTurn(deck,player2,player1,centerRow,search);
                }
         printCards(player1,player2,centerRow);
          
@@ -126,49 +127,46 @@ int main(){
   return 0;
 }
 
+
+// void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
+// checks what the cards ability is and uses it, takes in integer for the players turn
+void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
+
+    
+    int playerChoice = 0;
+    int searchResult = 0;
+
+    if(strcmp("shift2Right",centerRow[i].action) == 0){
+        // call shift right function
+        
+    }else if(strcmp("protect",centerRow[i].action) == 0){
+        printf("Which card would you like to protect?");
+        scanf("%d",&playerChoice);
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        // call protect function
+        protectCard(currPlayer,searchResult);
+    }else if(strcmp("shift2Left",centerRow[i].action) == 0){
+        // call shft2left function
+    }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
+        // call swapAdj function
+    }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
+        // call remove mid function
+    }else if(strcmp("removeRight",centerRow[i].action) == 0){
+        // call remove right function
+    }else if(strcmp("removeLeft",centerRow[i].action) == 0){
+        // call remove left function
+    }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
+        // call swap skip 1 card function
+    }
+}
+
+
+
+
 // void protectCard(card *player, int i)
 void protectCard(card *player, int i){
     player[i].isProtected = 1;
     printf("%d",player[i].isProtected);
-}
-
-//void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
-void swapAdjacent(card player[], int s) {//s is swap index
-   card temp;
-   char position[5];
-   int a;//adjacent card index
-     
-   printf("Which adjacent card would you like to swap? (left/right)");
-   scanf(" %c ", position);
-   
-   while (strcmp(position, "done") != 0) {
-      if(strcmp(position, "left") == 0) {
-         a = s - 1;
-         strcpy(position, "done");
-      }
-   
-      else if(strcmp(position, "right") == 0) {
-         a = s + 1;
-         strcpy(position, "done");
-      }
-   
-      else {
-         printf("Please enter 'left' or 'right'");
-      }
-   }
-   
-   
-   temp.value = player[s].value;
-   strcpy(temp.action, player[s].action);
-   
-   player[s].value = player[a].value;
-   strcpy(player[s].action, player[a].action);
-   
-   player[a].value = temp.value;
-   strcpy(player[a].action, temp.action);
-   
-   player[s].isProtected = 0;
-   player[a].isProtected = 0;
 }
 
 
@@ -181,7 +179,7 @@ int searchCards(card *player, int value, int n){
             return i;  
         }
     }
-    return -1; 
+    return 0; 
    }
 
 
