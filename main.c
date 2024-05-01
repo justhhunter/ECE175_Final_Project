@@ -15,17 +15,20 @@ void buildDeck(card *deck);
 void printCards(card *player1, card *player2, card *centerRow);
 void dealCards(card deck[], card p1[], card p2[]);
 void loadDeck(card *deck, FILE *file);
-void sortCards(sortCards(card p1[], card p2[]);
+void sortCards(card *player1, card *player2);
 void initializeCards(card *player1, card *player2, card *deck, card *centerRow);
 void startGame(card player1[], card player2[], card deck[], card centerRow[]);
 void shuffleDeck(card *deck);
+int countCards(card *deck, int n);
+int searchCards(card *player, int value, int n);
+void drawAndAssignCard(card *deck, card *centerRow, card *player);
 
 
 
 int main(){
      // declare and initialize variables
      card deck[84];
-     card discardPile[84];
+     //card discardPile[84];
      card player1[7];
      card player2[7];
      card centerRow[8]; //unsure of total for center row, double check before turn in
@@ -47,6 +50,8 @@ int main(){
         buildDeck(deck);
           // shuffle deck
          shuffleDeck(deck);
+        for(int i = 0; i < 84; i++){printf("\n%s %d",deck[i].action,deck[i].value);}
+
      }else if(playerChoice == 2){
            // load deck from file
           // check file is correctly opened
@@ -65,21 +70,53 @@ int main(){
      // deal cards to each player
 
      dealCards(deck, player1, player2);
-
+    printCards(player1,player2,centerRow);
      // sort each players hand
-      //sortCards(player1,player2);
-     sortCards(player1, player2);
+      sortCards(player1,player2);
       printCards(player1,player2,centerRow);
       // start game
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
 
      
-      
-      
-     //  while loop to let game go continuously
-      //for(int i = 84; i > -1;){
-         //
+      int counter = countCards(deck,84);// 84 minus the 3 cards weve have already removed
+      int winFlag = 0;
+      int playerEntry = 0;
+        int search = 0;
+      // loop until cards in deck run out or someone wins
+      while(winFlag == 0 && counter > 0){
+
+        // player 1s turn
+         printf("Player1 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
+        printf("If you enter a incorrect number I will assume you want to draw a card\n");
+         scanf("%d", &playerEntry);
+            search = searchCards(centerRow,playerEntry,8);
+         if(playerEntry == 1 || search == -1){
+            // call draw card function to draw a card
+            drawAndAssignCard(deck,centerRow,player1);
+            }else{// check if other entry is a card in the centerRow
+            // if yes then call that ability
+            // have 8 different ability functions
+            continue;
+               }
+        printCards(player1,player2,centerRow);
+
+            // player 2s turn
+         printf("Player2 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
+        printf("If you enter a incorrect number I will assume you want to draw a card\n");
+         scanf("%d", &playerEntry);
+            search = searchCards(centerRow,playerEntry,8);
+         if(playerEntry == 1 || search == -1){
+            // call draw card function to draw a card
+            drawAndAssignCard(deck,centerRow,player2);
+            }else{// check if other entry is a card in the centerRow
+            // if yes then call that ability
+            // have 8 different ability functions
+            continue;
+               }
+        printCards(player1,player2,centerRow);
+         
+         }
 
 
 
@@ -87,6 +124,71 @@ int main(){
   
   return 0;
 }
+
+
+
+
+//int searchCards(card *player, int value, int n)
+// searchs a hand for a certain card and returns index
+int searchCards(card *player, int value, int n){
+   for (int i = 0; i < n; i++) { 
+      if (player[i].value == value) {
+            return i;  
+        }
+    }
+    return -1; 
+   }
+
+
+//void drawAndAssignCard(card *deck, card *centerRow, card *player)
+// Draws a card from the pile and assigns it for the user
+void drawAndAssignCard(card *deck, card *centerRow, card *player){
+   // get index of deck to pull card from
+   int cardIndex = countCards(deck,84);
+   int userInp = 0;
+   // let user know their card, then they must replace one of the cards in their hand
+   printf("You got %d %s card! What would you like to replace it with in your hand?",deck[cardIndex].value,deck[cardIndex].action);
+   scanf("%d",&userInp);
+   int check = searchCards(player,userInp,7);
+   // do a check of the card number to make sure its there
+   while(check == -1){
+      printf("Invalid Entry\n");
+      printf("You got %d %s card! What would you like to replace it with in your hand?",deck[cardIndex].value,deck[cardIndex].action);
+      scanf("%d",&userInp);
+      check = searchCards(player,userInp,7); // find player card index for entry
+      }
+   
+      // if card has been found then put draw card in hand and chosen card in middle
+      
+      // find index of card in players hand we have in check
+      // find empty index in middle
+        for(int j = 0; j < 8;j++){
+            if(centerRow[j].value == 0){
+                // assign card to empty spot in middle
+                centerRow[j].value = player[check].value;
+                strcpy(centerRow[j].action,player[check].action);
+                break;
+                
+                } 
+            }
+      // take newly drawn card and place that in empty spot in players hand
+        player[check].value = deck[cardIndex].value;
+        strcpy(player[check].action,deck[cardIndex].action);
+      // finish and return
+   }
+
+
+//int countCards(card *deck)
+// Counts the cards in the deck to return its index
+int countCards(card *deck, int n){
+   int count = 0;
+   for(int i = 0; i < n; i++){
+      if(deck[i].value != 0){count++;}
+   }
+   return (count-1);
+}
+
+
 
 
 
@@ -160,8 +262,6 @@ void startGame(card player1[], card player2[], card deck[], card centerRow[]){
 
 
 
-// void takeTurn(card *player, card *centerSpace, card *deck);
-// Allows player to take their turn
 
 
 // void buildDeck(card *deck);
@@ -268,7 +368,6 @@ void sortCards(card p1[], card p2[]) {
           }
      }
 }
-
 
 // void loadDeck(card *deck, FILE *file);
 // Loads a deck from a preset file for testing purposes as defined in the project description
