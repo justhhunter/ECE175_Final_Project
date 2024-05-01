@@ -24,8 +24,8 @@ int searchCards(card *player, int value, int n);
 void drawAndAssignCard(card *deck, card *centerRow, card *player);
 void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
+int checkWinCondition(card *player);
 void swapAdjacent(card player[], int s);
-
 
 
 int main(){
@@ -81,14 +81,13 @@ int main(){
       startGame(player1, player2, deck, centerRow);
      printCards(player1,player2,centerRow);
 
-     
+
       int counter = countCards(deck,84);// 84 minus the 3 cards weve have already removed
       int winFlag = 0;
       int playerEntry = 0;
         int search = 0;
       // loop until cards in deck run out or someone wins
       while(winFlag == 0 && counter > 0){
-
         // player 1s turn
          printf("Player1 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
@@ -103,6 +102,8 @@ int main(){
             takeTurn(deck,player1,player2,centerRow,search);
                }
         printCards(player1,player2,centerRow);
+        winFlag = checkWinCondition(player1);
+        if(winFlag == 1){printf("You have won the game!!!!! Game will now exit\n"); return 0;}
 
             // player 2s turn
          printf("Player2 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
@@ -118,7 +119,8 @@ int main(){
                 takeTurn(deck,player2,player1,centerRow,search);
                }
         printCards(player1,player2,centerRow);
-         
+        winFlag = checkWinCondition(player2);
+        if(winFlag == 1){printf("You have won the game!!!!! Game will now exit\n"); return 0;}
          }
 
 
@@ -129,46 +131,6 @@ int main(){
 }
 
 
-// void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
-// checks what the cards ability is and uses it, takes in integer for the players turn
-void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
-
-    
-    int playerChoice = 0;
-    int searchResult = 0;
-
-    if(strcmp("shift2Right",centerRow[i].action) == 0){
-        // call shift right function
-        
-    }else if(strcmp("protect",centerRow[i].action) == 0){
-        printf("Which card would you like to protect?");
-        scanf("%d",&playerChoice);
-        searchResult = searchCards(currPlayer,playerChoice,7);
-        // call protect function
-        protectCard(currPlayer,searchResult);
-    }else if(strcmp("shift2Left",centerRow[i].action) == 0){
-        // call shft2left function
-    }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
-        // call swapAdj function
-    }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
-        // call remove mid function
-    }else if(strcmp("removeRight",centerRow[i].action) == 0){
-        // call remove right function
-    }else if(strcmp("removeLeft",centerRow[i].action) == 0){
-        // call remove left function
-    }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
-        // call swap skip 1 card function
-    }
-}
-
-
-
-
-// void protectCard(card *player, int i)
-void protectCard(card *player, int i){
-    player[i].isProtected = 1;
-    printf("%d",player[i].isProtected);
-}
 
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
 void swapAdjacent(card player[], int s) {//s is swap index
@@ -220,6 +182,67 @@ void swapAdjacent(card player[], int s) {//s is swap index
    player[s].isProtected = 0;
    player[a].isProtected = 0;
 }
+
+// void checkWinCondition(card *player);
+// Checks if a current players hand is a winning hand and ends game if yes
+// returns a 0 if no a 1 if yes
+int checkWinCondition(card *player){
+    for(int i = 0; i < 6;i++){
+        if(player[i].value > player[i+1].value){
+            return 0;// has not met win condition
+            }
+        }
+
+    return 1;
+}
+
+
+// void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow,)
+// checks what the cards ability is and uses it, takes in integer for the players turn
+void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i){
+
+    
+    int playerChoice = 0;
+    int searchResult = 0;
+
+    if(strcmp("shift2Right",centerRow[i].action) == 0){
+        // call shift right function
+        
+    }else if(strcmp("protect",centerRow[i].action) == 0){
+        printf("Which card would you like to protect?");
+        scanf("%d",&playerChoice);
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        // call protect function
+        protectCard(currPlayer,searchResult);
+    }else if(strcmp("shift2Left",centerRow[i].action) == 0){
+        // call shft2left function
+    }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
+        // call swapAdj function
+        printf("Which card would you like swap adjacent?");
+        scanf("%d",&playerChoice);
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        swapAdjacent(player, searchResult);
+    }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
+        // call remove mid function
+    }else if(strcmp("removeRight",centerRow[i].action) == 0){
+        // call remove right function
+    }else if(strcmp("removeLeft",centerRow[i].action) == 0){
+        // call remove left function
+    }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
+        // call swap skip 1 card function
+    }
+}
+
+
+
+
+// void protectCard(card *player, int i)
+void protectCard(card *player, int i){
+    player[i].isProtected = 1;
+    printf("%d",player[i].isProtected);
+}
+
+
 
 //int searchCards(card *player, int value, int n)
 // searchs a hand for a certain card and returns index
