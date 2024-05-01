@@ -169,7 +169,10 @@ void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRo
         // call remove left function
     }else if(strcmp("swapSkip1Card",centerRow[i].action) == 0){
         // call swap skip 1 card function
-        swapSkip1Card(currPlayer, i);
+        printf("Which card would you like to swap skip?");
+        scanf("%d");
+        searchResult = searchCards(currPlayer,playerChoice,7);
+        swapSkip1Card(currPlayer, searchResult);
     }
 }
 
