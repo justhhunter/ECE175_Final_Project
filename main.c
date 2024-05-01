@@ -26,7 +26,7 @@ void protectCard(card *player, int i);
 void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRow, int i);
 int checkWinCondition(card *player);
 void swapAdjacent(card player[], int s);
-void swapSkip1Card(card player[], int s);
+
 
 int main(){
      // declare and initialize variables
@@ -89,11 +89,11 @@ int main(){
       // loop until cards in deck run out or someone wins
       while(winFlag == 0 && counter > 0){
         // player 1s turn
-         printf("Player1 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
+         printf("Player1 would you like to draw a card or use a card in the center row(Enter 0 to draw a card)? ");
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
          scanf("%d", &playerEntry);
             search = searchCards(centerRow,playerEntry,8);
-         if(playerEntry == 1 || search == 0){
+         if(playerEntry == 0 || search == -1){
             // call draw card function to draw a card
             drawAndAssignCard(deck,centerRow,player1);
             }else{// check if other entry is a card in the centerRow
@@ -106,11 +106,11 @@ int main(){
         if(winFlag == 1){printf("You have won the game!!!!! Game will now exit\n"); return 0;}
 
             // player 2s turn
-         printf("Player2 would you like to draw a card or use a card in the center row(Enter 1 to draw a card)? ");
+         printf("Player2 would you like to draw a card or use a card in the center row(Enter 0 to draw a card)? ");
         printf("If you enter a incorrect number I will assume you want to draw a card\n");
          scanf("%d", &playerEntry);
             search = searchCards(centerRow,playerEntry,8);
-         if(playerEntry == 1 || search == 0){
+         if(playerEntry == 0 || search == -1){
             // call draw card function to draw a card
             drawAndAssignCard(deck,centerRow,player2);
             }else{// check if other entry is a card in the centerRow
@@ -132,31 +132,58 @@ int main(){
 
 
 
-//void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
+
+
+// void shift2left(card *player)
+// shifts a card two to the left
+void shift2left(card *player){
+    printf("Enter number of card you would like to shift 2 left\n");
+    int playerChoice;
+    scanf("%d",&playerChoice);
+    int search = searchCards(player,playerChoice,7);
+    // incase they go too far in either direction
+    if(search < 2){
+        search = 2;
+        }
+    
+        // Use temporary storage to help in shifting
+    card temp = player[search]; // Store the chosen card
+
+    // Move the chosen card two places to the left
+    player[search] = player[search - 1];  // Move card from left one place to the right
+    player[search - 1] = player[search - 2];  // Move card from left two places to the position of left one
+
+    // Place the stored card in the new position, two places to the left
+    player[search - 2] = temp;
+
+    
+}
+
 //void swapAdjacent(card player[], int swapIndex, int adjacentIndex)
 void swapAdjacent(card player[], int s) {//s is swap index
    card temp;
-   int position;
+   char position[5];
    int a;//adjacent card index
      
-   printf("Which adjacent card would you like to swap? Enter '0' for left, and '1' for right\n");
-   scanf("%d", &position);
+   printf("Which adjacent card would you like to swap? (left/right)\n");
+   scanf(" %c ", position);
    
    printf("**If your card is furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
-   
-   if (s != 0 || s != 6) {
-      if(position == 0) {//swaps with card on the left
+   while (strcmp(position, "done") != 0 || s != 0 || s != 6) {
+      if(strcmp(position, "left") == 0) {
          a = s - 1;
+         strcpy(position, "done");
       }
    
-      else if(position == 1) {//swaps with card on the right
+      else if(strcmp(position, "right") == 0) {
          a = s + 1;
+         strcpy(position, "done");
+      }
+   
+      else {
+         printf("Please enter 'left' or 'right'");
       }
    }
    
@@ -184,27 +211,28 @@ void swapAdjacent(card player[], int s) {//s is swap index
 
 void swapSkip1Card(card player[], int s) {//s is swap index
    card temp;
-   int position;
+   char position[5];
    int a;//adjacent card index
      
-   printf("Which adjacent card (one card between the two cards) would you like to swap? Enter '0' for left, and '1' for right\n");
-   scanf("%d", &position);
+   printf("Which adjacent card would you like to swap? (left/right)\n");
+   scanf(" %c ", position);
    
    printf("**If your card is furthest to the left, or the second furthest to the left, it will default to a swap with the respective right card.\n");
    printf("**If your card is furthest to the right, or the second furthest to the right, it will default to a swap with the respective left card\n");
    
-   while (position != 0 || position != 1) {
-      printf("Please enter either '0' for left, or '1' for right");
-      scanf("%d", &position);
-   }
-   
-   if (s != 0 || s != 1 || s != 5 || s != 6) {
-      if(position == 0) {//swaps with card on the left
+   while (strcmp(position, "done") != 0 || s != 0 || s != 1 || s != 5 || s != 6) {
+      if(strcmp(position, "left") == 0) {
          a = s - 2;
+         strcpy(position, "done");
       }
    
-      else if(position == 1) {//swaps with card on the right
+      else if(strcmp(position, "right") == 0) {
          a = s + 2;
+         strcpy(position, "done");
+      }
+   
+      else {
+         printf("Please enter 'left' or 'right'");
       }
    }
    
@@ -264,12 +292,13 @@ void takeTurn(card *deck, card *currPlayer, card *oppositePlayer, card *centerRo
         protectCard(currPlayer,searchResult);
     }else if(strcmp("shift2Left",centerRow[i].action) == 0){
         // call shft2left function
+        shift2left(currPlayer);
     }else if(strcmp("swapAdjacent",centerRow[i].action) == 0){
         // call swapAdj function
         printf("Which card would you like swap adjacent?");
         scanf("%d",&playerChoice);
         searchResult = searchCards(currPlayer,playerChoice,7);
-        swapAdjacent(player, searchResult);
+        swapAdjacent(currPlayer, searchResult);
     }else if(strcmp("removeMiddle",centerRow[i].action) == 0){
         // call remove mid function
     }else if(strcmp("removeRight",centerRow[i].action) == 0){
@@ -300,7 +329,7 @@ int searchCards(card *player, int value, int n){
             return i;  
         }
     }
-    return 0; 
+    return -1; 
    }
 
 
